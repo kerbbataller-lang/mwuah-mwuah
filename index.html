@@ -15,6 +15,7 @@ body {
   font-family: Georgia, serif;
   color: white;
   overflow: hidden;
+  background: #0a0a0a;
 }
 
 /* ALL SCREENS */
@@ -26,6 +27,8 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .screen.active {
@@ -41,7 +44,42 @@ body {
     url("background.jpg") center/cover no-repeat;
 }
 
-/* COUNTDOWN */
+/* SHOOTING STARS & NIGHT EFFECT */
+.stars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,1), transparent);
+  animation: shoot 3s linear infinite;
+  opacity: 0;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-45deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-600px) translateY(600px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* COUNTDOWN CARD */
 .card {
   width: min(700px, 95vw);
   padding: 35px 20px;
@@ -166,17 +204,9 @@ button {
   border: 3px solid #806d27;
 }
 
-.candle:nth-child(1) {
-  left: 45px;
-}
-
-.candle:nth-child(2) {
-  left: 98px;
-}
-
-.candle:nth-child(3) {
-  left: 151px;
-}
+.candle:nth-child(1) { left: 45px; }
+.candle:nth-child(2) { left: 98px; }
+.candle:nth-child(3) { left: 151px; }
 
 .flame {
   position: absolute;
@@ -234,330 +264,177 @@ button {
 }
 
 @media(max-width:550px) {
-  #timer {
-    grid-template-columns: repeat(2,1fr);
-  }
-
-  .letter-paper {
-    padding: 25px 20px;
-  }
+  #timer { grid-template-columns: repeat(2,1fr); }
+  .letter-paper { padding: 25px 20px; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- CONTAINER PARA SA SHOOTING STARS -->
+<div class="stars-container" id="stars"></div>
+
 <!-- COUNTDOWN -->
 <section id="countdown" class="screen active">
-
   <div class="card">
-
     <div class="small-title">✦ MINECRAFT WORLD ✦</div>
-
     <h1>Her Special Day<br>is Coming</h1>
-
-    <p class="subtitle">
-      Something special is waiting for you. ♡
-    </p>
+    <p class="subtitle">Something special is waiting for you. ♡</p>
 
     <div id="timer">
-
-      <div class="time">
-        <strong id="days">00</strong>
-        <span>DAYS</span>
-      </div>
-
-      <div class="time">
-        <strong id="hours">00</strong>
-        <span>HOURS</span>
-      </div>
-
-      <div class="time">
-        <strong id="minutes">00</strong>
-        <span>MINUTES</span>
-      </div>
-
-      <div class="time">
-        <strong id="seconds">00</strong>
-        <span>SECONDS</span>
-      </div>
-
+      <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
+      <div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
+      <div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
+      <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
     </div>
 
     <p id="status">Wait until September 21, 2026 ♡</p>
 
-    <button class="btn sound" id="soundButton">
-      🔊 SOUND ON
-    </button>
-
-    <br>
-
-    <!-- TEMPORARY TEST BUTTON -->
-    <button class="btn" id="testButton">
-      🧪 TEST START
-    </button>
-
-    <br><br>
-
-    <button class="btn" id="startButton" disabled>
-      START
-    </button>
-
+    <button class="btn sound" id="soundButton">🔊 SOUND ON</button><br>
+    <button class="btn" id="testButton">🧪 TEST START</button><br><br>
+    <button class="btn" id="startButton" disabled>START</button>
   </div>
-
 </section>
-
 
 <!-- CAKE -->
 <section id="cake" class="screen">
-
-  <div class="cake-message">
-    Here's a cake for you,<br>
-    take a wish. ✨
-  </div>
-
+  <div class="cake-message">Here's a cake for you,<br>take a wish. ✨</div>
   <div class="cake">
-
     <div class="cake-top">
-
-      <div class="candle">
-        <div class="flame"></div>
-      </div>
-
-      <div class="candle">
-        <div class="flame"></div>
-      </div>
-
-      <div class="candle">
-        <div class="flame"></div>
-      </div>
-
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
     </div>
-
     <div class="cake-body"></div>
-
-    <div class="cake-body-text">
-      HAPPY<br>
-      BIRTHDAY<br>
-      BABY
-    </div>
-
+    <div class="cake-body-text">HAPPY<br>BIRTHDAY<br>BABY</div>
   </div>
-
   <h2>Happy Birthday, Baby! 🎂</h2>
-
-  <button class="btn" id="letterButton">
-    OPEN YOUR LETTER 💌
-  </button>
-
+  <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
 </section>
-
 
 <!-- LETTER -->
 <section id="letter" class="screen">
-
   <div class="letter-paper">
-
     <h2>💌 A Letter For You</h2>
-
     <p>
 Dear Baby,
 
 Happy Birthday! 🎉
 
-Today is your special day, and I hope this little
-surprise makes you smile.
+Today is your special day, and I hope this little surprise makes you smile.
 
-I hope this new chapter of your life brings you
-happiness, beautiful memories, and many reasons
-to keep smiling.
+I hope this new chapter of your life brings you happiness, beautiful memories, and many reasons to keep smiling.
 
-Always remember that you are special and that
-you deserve all the good things life has to offer.
+Always remember that you are special and that you deserve all the good things life has to offer.
 
-Enjoy your day, baby. Eat lots of cake, make a wish,
-and have the happiest birthday. ❤️
+Enjoy your day, baby. Eat lots of cake, make a wish, and have the happiest birthday. ❤️
 
 Happy Birthday once again! 🎂✨
 
 — From someone who made this little world for you ♡
     </p>
-
   </div>
-
 </section>
 
-
 <script>
+/* GENERATE SHOOTING STARS */
+function createShootingStars() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 6; i++) {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.top = Math.random() * 50 + 'vh';
+    star.style.left = (Math.random() * 60 + 40) + 'vw';
+    star.style.animationDelay = (Math.random() * 4) + 's';
+    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    container.appendChild(star);
+  }
+}
+createShootingStars();
 
-const birthday =
-  new Date("2026-09-21T00:00:00+08:00");
-
+/* COUNTDOWN LOGIC */
+const birthday = new Date("2026-09-21T00:00:00+08:00");
 const days = document.getElementById("days");
 const hours = document.getElementById("hours");
 const minutes = document.getElementById("minutes");
 const seconds = document.getElementById("seconds");
-
-const startButton =
-  document.getElementById("startButton");
-
-const statusText =
-  document.getElementById("status");
+const startButton = document.getElementById("startButton");
+const statusText = document.getElementById("status");
 
 function updateCountdown() {
-
   const now = new Date();
   const difference = birthday - now;
 
   if (difference <= 0) {
-
     days.textContent = "00";
     hours.textContent = "00";
     minutes.textContent = "00";
     seconds.textContent = "00";
-
     startButton.disabled = false;
-
-    statusText.textContent =
-      "🎉 It's your birthday! Your world is ready.";
-
+    statusText.textContent = "🎉 It's your birthday! Your world is ready.";
     return;
   }
 
-  const d =
-    Math.floor(difference / 86400000);
+  const d = Math.floor(difference / 86400000);
+  const h = Math.floor(difference / 3600000) % 24;
+  const m = Math.floor(difference / 60000) % 60;
+  const s = Math.floor(difference / 1000) % 60;
 
-  const h =
-    Math.floor(difference / 3600000) % 24;
-
-  const m =
-    Math.floor(difference / 60000) % 60;
-
-  const s =
-    Math.floor(difference / 1000) % 60;
-
-  days.textContent =
-    String(d).padStart(2,"0");
-
-  hours.textContent =
-    String(h).padStart(2,"0");
-
-  minutes.textContent =
-    String(m).padStart(2,"0");
-
-  seconds.textContent =
-    String(s).padStart(2,"0");
+  days.textContent = String(d).padStart(2,"0");
+  hours.textContent = String(h).padStart(2,"0");
+  minutes.textContent = String(m).padStart(2,"0");
+  seconds.textContent = String(s).padStart(2,"0");
 }
-
 
 function showScreen(id) {
-
-  document
-    .querySelectorAll(".screen")
-    .forEach(screen =>
-      screen.classList.remove("active")
-    );
-
-  document
-    .getElementById(id)
-    .classList.add("active");
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-
-/* REAL START */
 startButton.onclick = function() {
-
-  if (new Date() >= birthday) {
-    showScreen("cake");
-  }
-
+  if (new Date() >= birthday) showScreen("cake");
 };
 
+document.getElementById("testButton").onclick = function() {
+  showScreen("cake");
+};
 
-/* TEST START — FOR YOU ONLY */
-document
-  .getElementById("testButton")
-  .onclick = function() {
+document.getElementById("letterButton").onclick = function() {
+  showScreen("letter");
+};
 
-    showScreen("cake");
-
-  };
-
-
-/* LETTER */
-document
-  .getElementById("letterButton")
-  .onclick = function() {
-
-    showScreen("letter");
-
-  };
-
-
-/* SIMPLE MINECRAFT-STYLE SOUND */
+/* SOUND */
 let audioContext = null;
 let soundOn = false;
 
 function playSound() {
-
   if (!soundOn) return;
-
   if (!audioContext) {
-
-    audioContext =
-      new (window.AudioContext ||
-      window.webkitAudioContext)();
-
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
-
-  const oscillator =
-    audioContext.createOscillator();
-
-  const gain =
-    audioContext.createGain();
-
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
   oscillator.type = "square";
   oscillator.frequency.value = 600;
-
-  gain.gain.setValueAtTime(
-    0.03,
-    audioContext.currentTime
-  );
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.001,
-    audioContext.currentTime + .08
-  );
-
+  gain.gain.setValueAtTime(0.03, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + .08);
   oscillator.connect(gain);
   gain.connect(audioContext.destination);
-
   oscillator.start();
-  oscillator.stop(
-    audioContext.currentTime + .08
-  );
+  oscillator.stop(audioContext.currentTime + .08);
 }
 
-
-document
-  .getElementById("soundButton")
-  .onclick = function() {
-
-    soundOn = !soundOn;
-
-    this.textContent =
-      soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
-
-    if (soundOn) playSound();
-
-  };
-
+document.getElementById("soundButton").onclick = function() {
+  soundOn = !soundOn;
+  this.textContent = soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
+  if (soundOn) playSound();
+};
 
 updateCountdown();
-
 setInterval(updateCountdown, 1000);
-
 </script>
 
 </body>
 </html>
+
