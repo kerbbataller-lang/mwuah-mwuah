@@ -391,10 +391,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
       <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
     </div>
 
-    <p id="status">Wait until September 21, 2026 </p>
+    <p id="status">Wait until September 21, 2026</p>
 
-    <button class="btn sound" id="soundButton">🔊 SOUND ON</button><br>
-    <button class="btn" id="testButton">🧪 TEST START</button><br><br>
+    <button class="btn sound" id="soundButton">🔊</button><br><br>
     <button class="btn" id="startButton" disabled>START</button>
   </div>
 </section>
@@ -512,12 +511,9 @@ function showScreen(id) {
 
 startButton.onclick = function() {
   startMusic();
-  if (new Date() >= birthday) showScreen("cake");
-};
-
-document.getElementById("testButton").onclick = function() {
-  startMusic();
-  showScreen("cake");
+  if (new Date() >= birthday) {
+    showScreen("cake");
+  }
 };
 
 /* MINI GAME JAVASCRIPT */
@@ -644,11 +640,11 @@ function playSound(freq = 600, type = "square", duration = 0.08) {
 document.getElementById("soundButton").onclick = function() {
   soundOn = !soundOn;
   if (soundOn) {
-    this.textContent = "🔊 SOUND ON";
+    this.textContent = "🔊";
     startMusic();
     playSound(520, "square", 0.1);
   } else {
-    this.textContent = "🔇 SOUND OFF";
+    this.textContent = "🔇";
     bgMusic.pause();
   }
 };
