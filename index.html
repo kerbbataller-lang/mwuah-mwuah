@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Monthsary, Baby ♡</title>
+<title>Happy Birthday, Baby 🎂</title>
 
 <style>
 * {
@@ -120,111 +120,443 @@ button {
   background: rgba(255,255,255,.15);
 }
 
-/* CAKE & GALLERY */
+/* CAKE */
 #cake {
   flex-direction: column;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  max-width: 320px;
-  margin: 15px auto;
+.cake-message {
+  font-size: clamp(20px,5vw,30px);
+  line-height: 1.5;
+  text-shadow: 2px 3px 5px #000;
 }
 
-.gallery img {
+.cake {
+  position: relative;
+  width: 220px;
+  height: 170px;
+  margin: 20px;
+}
+
+.cake-top {
+  position: absolute;
+  top: 35px;
+  width: 220px;
+  height: 55px;
+  background: #f3a7bd;
+  border: 6px solid #754254;
+  border-radius: 8px;
+}
+
+.cake-body {
+  position: absolute;
+  top: 85px;
+  width: 220px;
+  height: 80px;
+  background: #9b623e;
+  border: 6px solid #633c28;
+}
+
+.candle {
+  position: absolute;
+  top: -55px;
+  width: 14px;
+  height: 50px;
+  background: #f4d65d;
+  border: 3px solid #806d27;
+}
+
+.candle:nth-child(1) {
+  left: 45px;
+}
+
+.candle:nth-child(2) {
+  left: 98px;
+}
+
+.candle:nth-child(3) {
+  left: 151px;
+}
+
+.flame {
+  position: absolute;
+  top: -20px;
+  left: -2px;
+  width: 12px;
+  height: 18px;
+  background: #ffb52e;
+  border-radius: 50%;
+  animation: flame .5s infinite alternate;
+}
+
+@keyframes flame {
+  from { transform: scale(.8); }
+  to { transform: scale(1.1); }
+}
+
+.cake-body-text {
+  position: absolute;
   width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 12px;
+  top: 105px;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1.1;
+  text-shadow: 2px 2px #4a2b1b;
 }
 
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-width: 240px;
-  margin: 15px auto;
+/* LETTER */
+#letter {
+  background: #181818;
+  overflow-y: auto;
 }
 
-.keypad button {
-  padding: 15px;
-  font-size: 20px;
-  border-radius: 10px;
-  background: rgba(255,255,255,.2);
-  color: white;
+.letter-paper {
+  width: min(700px, 94vw);
+  min-height: 500px;
+  padding: 35px;
+  background: #fff3d6;
+  color: #38271c;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px #000;
+}
+
+.letter-paper h2 {
+  text-align: center;
+  font-size: 32px;
+}
+
+.letter-paper p {
+  white-space: pre-line;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+@media(max-width:550px) {
+  #timer {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .letter-paper {
+    padding: 25px 20px;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<div class="screen active" id="countdown">
-  <div class="card">
-    <div class="small-title">FOR MY WIFEY ♡</div>
-    <h1>I Love You So Much</h1>
-    <p class="subtitle">Enter passcode to unlock:</p>
-    <h2 id="codeDisplay">____</h2>
-    
-    <div class="keypad">
-      <button onclick="add(1)">1</button>
-      <button onclick="add(2)">2</button>
-      <button onclick="add(3)">3</button>
-      <button onclick="add(4)">4</button>
-      <button onclick="add(5)">5</button>
-      <button onclick="add(6)">6</button>
-      <button onclick="add(7)">7</button>
-      <button onclick="add(8)">8</button>
-      <button onclick="add(9)">9</button>
-      <button onclick="back()">C</button>
-      <button onclick="add(0)">0</button>
-      <button onclick="checkCode()">OK</button>
-    </div>
-  </div>
-</div>
+<!-- COUNTDOWN -->
+<section id="countdown" class="screen active">
 
-<div class="screen" id="cake">
   <div class="card">
-    <h1>Our Memories ♡</h1>
-    <div class="gallery">
-      <img src="IMG_20260831_220323.jpg" alt="Memory 1">
-      <img src="IMG_20260831_220240_578.jpg" alt="Memory 2">
-      <img src="IMG_20260831_220133.jpg" alt="Memory 3">
-      <img src="IMG_20260831_220059.jpg" alt="Memory 4">
+
+    <div class="small-title">✦ MINECRAFT WORLD ✦</div>
+
+    <h1>Her Special Day<br>is Coming</h1>
+
+    <p class="subtitle">
+      Something special is waiting for you. ♡
+    </p>
+
+    <div id="timer">
+
+      <div class="time">
+        <strong id="days">00</strong>
+        <span>DAYS</span>
+      </div>
+
+      <div class="time">
+        <strong id="hours">00</strong>
+        <span>HOURS</span>
+      </div>
+
+      <div class="time">
+        <strong id="minutes">00</strong>
+        <span>MINUTES</span>
+      </div>
+
+      <div class="time">
+        <strong id="seconds">00</strong>
+        <span>SECONDS</span>
+      </div>
+
     </div>
+
+    <p id="status">Wait until September 21, 2026 ♡</p>
+
+    <button class="btn sound" id="soundButton">
+      🔊 SOUND ON
+    </button>
+
+    <br>
+
+    <!-- TEMPORARY TEST BUTTON -->
+    <button class="btn" id="testButton">
+      🧪 TEST START
+    </button>
+
+    <br><br>
+
+    <button class="btn" id="startButton" disabled>
+      START
+    </button>
+
   </div>
-</div>
+
+</section>
+
+
+<!-- CAKE -->
+<section id="cake" class="screen">
+
+  <div class="cake-message">
+    Here's a cake for you,<br>
+    take a wish. ✨
+  </div>
+
+  <div class="cake">
+
+    <div class="cake-top">
+
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
+
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
+
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
+
+    </div>
+
+    <div class="cake-body"></div>
+
+    <div class="cake-body-text">
+      HAPPY<br>
+      BIRTHDAY<br>
+      BABY
+    </div>
+
+  </div>
+
+  <h2>Happy Birthday, Baby! 🎂</h2>
+
+  <button class="btn" id="letterButton">
+    OPEN YOUR LETTER 💌
+  </button>
+
+</section>
+
+
+<!-- LETTER -->
+<section id="letter" class="screen">
+
+  <div class="letter-paper">
+
+    <h2>💌 A Letter For You</h2>
+
+    <p>
+Dear Baby,
+
+Happy Birthday! 🎉
+
+Today is your special day, and I hope this little
+surprise makes you smile.
+
+I hope this new chapter of your life brings you
+happiness, beautiful memories, and many reasons
+to keep smiling.
+
+Always remember that you are special and that
+you deserve all the good things life has to offer.
+
+Enjoy your day, baby. Eat lots of cake, make a wish,
+and have the happiest birthday. ❤️
+
+Happy Birthday once again! 🎂✨
+
+— From someone who made this little world for you ♡
+    </p>
+
+  </div>
+
+</section>
+
 
 <script>
-let code = '';
-const secret = '9126';
 
-function render() {
-  document.getElementById('codeDisplay').innerText = code.padEnd(4, '_');
-}
+const birthday =
+  new Date("2026-09-21T00:00:00+08:00");
 
-function add(n) {
-  if (code.length < 4) {
-    code += n;
-    render();
+const days = document.getElementById("days");
+const hours = document.getElementById("hours");
+const minutes = document.getElementById("minutes");
+const seconds = document.getElementById("seconds");
+
+const startButton =
+  document.getElementById("startButton");
+
+const statusText =
+  document.getElementById("status");
+
+function updateCountdown() {
+
+  const now = new Date();
+  const difference = birthday - now;
+
+  if (difference <= 0) {
+
+    days.textContent = "00";
+    hours.textContent = "00";
+    minutes.textContent = "00";
+    seconds.textContent = "00";
+
+    startButton.disabled = false;
+
+    statusText.textContent =
+      "🎉 It's your birthday! Your world is ready.";
+
+    return;
   }
+
+  const d =
+    Math.floor(difference / 86400000);
+
+  const h =
+    Math.floor(difference / 3600000) % 24;
+
+  const m =
+    Math.floor(difference / 60000) % 60;
+
+  const s =
+    Math.floor(difference / 1000) % 60;
+
+  days.textContent =
+    String(d).padStart(2,"0");
+
+  hours.textContent =
+    String(h).padStart(2,"0");
+
+  minutes.textContent =
+    String(m).padStart(2,"0");
+
+  seconds.textContent =
+    String(s).padStart(2,"0");
 }
 
-function back() {
-  code = code.slice(0, -1);
-  render();
+
+function showScreen(id) {
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen =>
+      screen.classList.remove("active")
+    );
+
+  document
+    .getElementById(id)
+    .classList.add("active");
 }
 
-function checkCode() {
-  if (code === secret) {
-    document.getElementById('countdown').classList.remove('active');
-    document.getElementById('cake').classList.add('active');
-  } else {
-    alert('Wrong Passcode!');
-    code = '';
-    render();
+
+/* REAL START */
+startButton.onclick = function() {
+
+  if (new Date() >= birthday) {
+    showScreen("cake");
   }
+
+};
+
+
+/* TEST START — FOR YOU ONLY */
+document
+  .getElementById("testButton")
+  .onclick = function() {
+
+    showScreen("cake");
+
+  };
+
+
+/* LETTER */
+document
+  .getElementById("letterButton")
+  .onclick = function() {
+
+    showScreen("letter");
+
+  };
+
+
+/* SIMPLE MINECRAFT-STYLE SOUND */
+let audioContext = null;
+let soundOn = false;
+
+function playSound() {
+
+  if (!soundOn) return;
+
+  if (!audioContext) {
+
+    audioContext =
+      new (window.AudioContext ||
+      window.webkitAudioContext)();
+
+  }
+
+  const oscillator =
+    audioContext.createOscillator();
+
+  const gain =
+    audioContext.createGain();
+
+  oscillator.type = "square";
+  oscillator.frequency.value = 600;
+
+  gain.gain.setValueAtTime(
+    0.03,
+    audioContext.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioContext.currentTime + .08
+  );
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.start();
+  oscillator.stop(
+    audioContext.currentTime + .08
+  );
 }
+
+
+document
+  .getElementById("soundButton")
+  .onclick = function() {
+
+    soundOn = !soundOn;
+
+    this.textContent =
+      soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
+
+    if (soundOn) playSound();
+
+  };
+
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
 </script>
 
 </body>
