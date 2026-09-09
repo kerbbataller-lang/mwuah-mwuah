@@ -39,10 +39,36 @@ body {
 #countdown,
 #cake {
   position: relative;
+  overflow: hidden;
+}
+
+#countdown::before,
+#cake::before {
+  content: "";
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
   background:
     linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.58)),
     url("background.jpg") center/cover no-repeat;
+  z-index: -1;
+  animation: moveTrees 18s ease-in-out infinite alternate;
 }
+
+@keyframes moveTrees {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.06) translate(-15px, -10px);
+  }
+  100% {
+    transform: scale(1.03) translate(15px, 5px);
+  }
+}
+  
 
 /* SHOOTING STARS & NIGHT EFFECT */
 .stars-container {
