@@ -158,7 +158,7 @@ button {
   background: rgba(255,255,255,.15);
 }
 
-/* CAKE */
+/* CAKE SECTION */
 #cake {
   flex-direction: column;
 }
@@ -169,73 +169,7 @@ button {
   text-shadow: 2px 3px 5px #000;
 }
 
-.cake {
-  position: relative;
-  width: 220px;
-  height: 170px;
-  margin: 20px;
-}
-
-.cake-top {
-  position: absolute;
-  top: 35px;
-  width: 220px;
-  height: 55px;
-  background: #f3a7bd;
-  border: 6px solid #754254;
-  border-radius: 8px;
-}
-
-.cake-body {
-  position: absolute;
-  top: 85px;
-  width: 220px;
-  height: 80px;
-  background: #9b623e;
-  border: 6px solid #633c28;
-}
-
-.candle {
-  position: absolute;
-  top: -55px;
-  width: 14px;
-  height: 50px;
-  background: #f4d65d;
-  border: 3px solid #806d27;
-}
-
-.candle:nth-child(1) { left: 45px; }
-.candle:nth-child(2) { left: 98px; }
-.candle:nth-child(3) { left: 151px; }
-
-.flame {
-  position: absolute;
-  top: -20px;
-  left: -2px;
-  width: 12px;
-  height: 18px;
-  background: #ffb52e;
-  border-radius: 50%;
-  animation: flame .5s infinite alternate;
-}
-
-@keyframes flame {
-  from { transform: scale(.8); }
-  to { transform: scale(1.1); }
-}
-
-.cake-body-text {
-  position: absolute;
-  width: 100%;
-  top: 105px;
-  z-index: 2;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 1.1;
-  text-shadow: 2px 2px #4a2b1b;
-}
-
-/* LETTER */
+/* LETTER SECTION */
 #letter {
   background: #181818;
   overflow-y: auto;
@@ -267,6 +201,16 @@ button {
   #timer { grid-template-columns: repeat(2,1fr); }
   .letter-paper { padding: 25px 20px; }
 }
+
+/* CAKE ZOOM ANIMATION */
+@keyframes cakeZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
 </style>
 </head>
 
@@ -278,7 +222,7 @@ button {
 <!-- COUNTDOWN -->
 <section id="countdown" class="screen active">
   <div class="card">
-    <div class="small-title">✦ MINECRAFT WORLD ✦</div>
+    <div class="small-title">✦ MALUNGGAY WORLD ✦</div>
     <h1>Her Special Day<br>is Coming</h1>
     <p class="subtitle">Something special is waiting for you. ♡</p>
 
@@ -289,7 +233,7 @@ button {
       <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
     </div>
 
-    <p id="status">Wait until September 21, 2026 ♡</p>
+    <p id="status">Wait until September 21, 2026 </p>
 
     <button class="btn sound" id="soundButton">🔊 SOUND ON</button><br>
     <button class="btn" id="testButton">🧪 TEST START</button><br><br>
@@ -299,9 +243,10 @@ button {
 
 <!-- CAKE -->
 <section id="cake" class="screen">
-  <div class="cake-message">Here's a cake for you,<br>take a wish. ✨</div>
-  <img src="cake.jpg" alt="Pixel Birthday Cake" style="width: 220px; height: auto; margin: 20px auto; display: block;">
+  <div class="cake-message">Here's a cake for you,<br>take a wish.</div>
   
+  <img src="cake.png" alt="Pixel Birthday Cake" style="width: 220px; height: auto; margin: 20px auto; display: block; animation: cakeZoom 3s ease-in-out infinite alternate;">
+
   <h2>Happy Birthday, Baby! 🎂</h2>
   <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
 </section>
