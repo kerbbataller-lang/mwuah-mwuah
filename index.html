@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday, Baby 🎂</title>
+<title>Happy Monthsary, Baby ♡</title>
 
 <style>
 * {
@@ -120,9 +120,112 @@ button {
   background: rgba(255,255,255,.15);
 }
 
-/* CAKE */
+/* CAKE & GALLERY */
 #cake {
   flex-direction: column;
 }
 
-.cake
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 320px;
+  margin: 15px auto;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 240px;
+  margin: 15px auto;
+}
+
+.keypad button {
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.2);
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="screen active" id="countdown">
+  <div class="card">
+    <div class="small-title">FOR MY WIFEY ♡</div>
+    <h1>I Love You So Much</h1>
+    <p class="subtitle">Enter passcode to unlock:</p>
+    <h2 id="codeDisplay">____</h2>
+    
+    <div class="keypad">
+      <button onclick="add(1)">1</button>
+      <button onclick="add(2)">2</button>
+      <button onclick="add(3)">3</button>
+      <button onclick="add(4)">4</button>
+      <button onclick="add(5)">5</button>
+      <button onclick="add(6)">6</button>
+      <button onclick="add(7)">7</button>
+      <button onclick="add(8)">8</button>
+      <button onclick="add(9)">9</button>
+      <button onclick="back()">C</button>
+      <button onclick="add(0)">0</button>
+      <button onclick="checkCode()">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="cake">
+  <div class="card">
+    <h1>Our Memories ♡</h1>
+    <div class="gallery">
+      <img src="IMG_20260831_220323.jpg" alt="Memory 1">
+      <img src="IMG_20260831_220240_578.jpg" alt="Memory 2">
+      <img src="IMG_20260831_220133.jpg" alt="Memory 3">
+      <img src="IMG_20260831_220059.jpg" alt="Memory 4">
+    </div>
+  </div>
+</div>
+
+<script>
+let code = '';
+const secret = '9126';
+
+function render() {
+  document.getElementById('codeDisplay').innerText = code.padEnd(4, '_');
+}
+
+function add(n) {
+  if (code.length < 4) {
+    code += n;
+    render();
+  }
+}
+
+function back() {
+  code = code.slice(0, -1);
+  render();
+}
+
+function checkCode() {
+  if (code === secret) {
+    document.getElementById('countdown').classList.remove('active');
+    document.getElementById('cake').classList.add('active');
+  } else {
+    alert('Wrong Passcode!');
+    code = '';
+    render();
+  }
+}
+</script>
+
+</body>
+</html>
