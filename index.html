@@ -16,6 +16,7 @@ body {
   color: white;
   overflow: hidden;
   background: #0a0a0a;
+  user-select: none;
 }
 
 /* ALL SCREENS */
@@ -37,13 +38,15 @@ body {
 
 /* MINECRAFT BACKGROUND */
 #countdown,
-#cake {
+#cake,
+#minigame {
   position: relative;
   overflow: hidden;
 }
 
 #countdown::before,
-#cake::before {
+#cake::before,
+#minigame::before {
   content: "";
   position: absolute;
   top: -5%;
@@ -68,7 +71,6 @@ body {
     transform: scale(1.03) translate(15px, 5px);
   }
 }
-  
 
 /* SHOOTING STARS & NIGHT EFFECT */
 .stars-container {
@@ -172,6 +174,11 @@ button {
   font-weight: bold;
   font-size: 16px;
   box-shadow: 0 5px 15px #0008;
+  transition: transform 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.95);
 }
 
 .btn:disabled {
@@ -193,6 +200,137 @@ button {
   font-size: clamp(20px,5vw,30px);
   line-height: 1.5;
   text-shadow: 2px 3px 5px #000;
+}
+
+/* MINECRAFT CHEST MINI-GAME SECTION */
+#minigame {
+  flex-direction: column;
+}
+
+.game-title {
+  font-size: clamp(18px, 4.5vw, 26px);
+  margin-bottom: 25px;
+  background: rgba(0,0,0,0.65);
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 2px solid #555;
+  text-shadow: 2px 2px #000;
+  max-width: 90vw;
+}
+
+.chests-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  height: 180px;
+  position: relative;
+  margin: 10px auto 30px;
+}
+
+.chest-wrapper {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  transition: left 0.4s ease-in-out, top 0.4s ease-in-out, transform 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* PIXEL CHEST GRAPHIC (CSS MINECRAFT STYLE) */
+.minecraft-chest {
+  width: 80px;
+  height: 80px;
+  background: #8b5a2b;
+  border: 5px solid #3d2314;
+  box-shadow: inset 0 0 0 3px #a66d3b, 0 8px 15px rgba(0,0,0,0.6);
+  position: relative;
+  border-radius: 4px;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.minecraft-chest::before {
+  /* LATCH */
+  content: "";
+  position: absolute;
+  top: 32px;
+  left: 28px;
+  width: 14px;
+  height: 18px;
+  background: #bfbfbf;
+  border: 2px solid #3a3a3a;
+  border-radius: 2px;
+  z-index: 3;
+}
+
+.minecraft-chest::after {
+  /* SEAM */
+  content: "";
+  position: absolute;
+  top: 36px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #3d2314;
+  z-index: 2;
+}
+
+.chest-wrapper:hover .minecraft-chest {
+  transform: scale(1.05);
+}
+
+.chest-wrapper.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-12px); }
+  40% { transform: translateX(12px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+/* OPEN CHEST ANIMATION */
+.chest-wrapper.open .minecraft-chest {
+  background: #5c3a1e;
+  transform: scale(1.1);
+}
+
+.chest-wrapper.open .minecraft-chest::after {
+  top: 10px;
+  height: 6px;
+  background: #201008;
+}
+
+/* MINECRAFT PAPER ITEM */
+.paper-item {
+  position: absolute;
+  width: 45px;
+  height: 55px;
+  background: #f0f0e0;
+  border: 3px solid #111;
+  box-shadow: inset -4px -4px #d0d0c0;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transform: scale(0.3);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.paper-item::after {
+  content: "💌";
+  font-size: 20px;
+  display: block;
+  margin-top: 10px;
+}
+
+.chest-wrapper.open .paper-item {
+  opacity: 1;
+  transform: translateY(-65px) scale(1.3);
 }
 
 /* LETTER SECTION */
@@ -226,6 +364,11 @@ button {
 @media(max-width:550px) {
   #timer { grid-template-columns: repeat(2,1fr); }
   .letter-paper { padding: 25px 20px; }
+  .chests-container { height: 140px; }
+  .chest-wrapper { width: 75px; height: 75px; }
+  .minecraft-chest { width: 70px; height: 70px; }
+  .minecraft-chest::before { top: 27px; left: 24px; width: 12px; height: 16px; }
+  .minecraft-chest::after { top: 31px; }
 }
 
 /* CAKE ZOOM ANIMATION */
@@ -275,6 +418,26 @@ button {
 
   <h2>Happy Birthday, Baby! 🎂</h2>
   <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
+</section>
+
+<!-- MINECRAFT CHEST MINI-GAME -->
+<section id="minigame" class="screen">
+  <div class="game-title" id="gameInstruction">💌 Your letter has been hidden in one of the chests...</div>
+
+  <div class="chests-container" id="chestsContainer">
+    <div class="chest-wrapper" id="chest0">
+      <div class="minecraft-chest"></div>
+      <div class="paper-item"></div>
+    </div>
+    <div class="chest-wrapper" id="chest1">
+      <div class="minecraft-chest"></div>
+      <div class="paper-item"></div>
+    </div>
+    <div class="chest-wrapper" id="chest2">
+      <div class="minecraft-chest"></div>
+      <div class="paper-item"></div>
+    </div>
+  </div>
 </section>
 
 <!-- LETTER -->
@@ -364,35 +527,129 @@ document.getElementById("testButton").onclick = function() {
   showScreen("cake");
 };
 
+/* CHEST MINI-GAME LOGIC */
+let correctChestIndex = 1;
+let isShuffling = false;
+let gameInteractive = false;
+let positions = [0, 1, 2];
+
+const chests = [
+  document.getElementById("chest0"),
+  document.getElementById("chest1"),
+  document.getElementById("chest2")
+];
+const instruction = document.getElementById("gameInstruction");
+
+function positionChests() {
+  const containerWidth = document.getElementById("chestsContainer").offsetWidth;
+  const chestWidth = chests[0].offsetWidth;
+  const gap = (containerWidth - (chestWidth * 3)) / 2;
+
+  positions.forEach((posIndex, chestIdx) => {
+    const leftPos = posIndex * (chestWidth + gap);
+    chests[chestIdx].style.left = leftPos + "px";
+  });
+}
+
+function startChestGame() {
+  showScreen("minigame");
+  gameInteractive = false;
+  isShuffling = true;
+  instruction.textContent = "💌 Your letter has been hidden in one of the chests...";
+  
+  chests.forEach(c => c.classList.remove("open", "shake"));
+  positions = [0, 1, 2];
+  correctChestIndex = Math.floor(Math.random() * 3);
+  
+  setTimeout(() => {
+    positionChests();
+    let shuffleCount = 0;
+    const maxShuffles = 6;
+    instruction.textContent = "🔀 Shuffling the chests...";
+
+    const shuffleInterval = setInterval(() => {
+      let idx1 = Math.floor(Math.random() * 3);
+      let idx2 = Math.floor(Math.random() * 3);
+      while (idx1 === idx2) idx2 = Math.floor(Math.random() * 3);
+
+      let temp = positions[idx1];
+      positions[idx1] = positions[idx2];
+      positions[idx2] = temp;
+
+      positionChests();
+      playSound(700, "sine", 0.05);
+
+      shuffleCount++;
+      if (shuffleCount >= maxShuffles) {
+        clearInterval(shuffleInterval);
+        setTimeout(() => {
+          instruction.textContent = "🔎 Find the chest containing your letter!";
+          isShuffling = false;
+          gameInteractive = true;
+        }, 500);
+      }
+    }, 450);
+  }, 300);
+}
+
 document.getElementById("letterButton").onclick = function() {
-  showScreen("letter");
+  startChestGame();
 };
 
-/* SOUND */
+chests.forEach((chest, idx) => {
+  chest.onclick = function() {
+    if (!gameInteractive || isShuffling) return;
+
+    if (idx === correctChestIndex) {
+      gameInteractive = false;
+      chest.classList.add("open");
+      instruction.textContent = "✨ You found it!";
+      playSound(880, "square", 0.2);
+
+      setTimeout(() => {
+        showScreen("letter");
+      }, 1800);
+    } else {
+      chest.classList.add("shake");
+      instruction.textContent = "❌ Not here! Try again.";
+      playSound(250, "sawtooth", 0.15);
+
+      setTimeout(() => {
+        chest.classList.remove("shake");
+      }, 500);
+    }
+  };
+});
+
+window.addEventListener('resize', positionChests);
+
+/* SOUND EFFECT SYNTHESIZER */
 let audioContext = null;
 let soundOn = false;
 
-function playSound() {
+function playSound(freq = 600, type = "square", duration = 0.08) {
   if (!soundOn) return;
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-  oscillator.type = "square";
-  oscillator.frequency.value = 600;
-  gain.gain.setValueAtTime(0.03, audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + .08);
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-  oscillator.start();
-  oscillator.stop(audioContext.currentTime + .08);
+  try {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    oscillator.type = type;
+    oscillator.frequency.value = freq;
+    gain.gain.setValueAtTime(0.03, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + duration);
+  } catch(e) {}
 }
 
 document.getElementById("soundButton").onclick = function() {
   soundOn = !soundOn;
   this.textContent = soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
-  if (soundOn) playSound();
+  if (soundOn) playSound(520, "square", 0.1);
 };
 
 updateCountdown();
@@ -401,4 +658,3 @@ setInterval(updateCountdown, 1000);
 
 </body>
 </html>
-
