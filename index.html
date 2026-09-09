@@ -39,14 +39,16 @@ body {
 /* MINECRAFT BACKGROUND */
 #countdown,
 #cake,
-#minigame {
+#minigame,
+#letter {
   position: relative;
   overflow: hidden;
 }
 
 #countdown::before,
 #cake::before,
-#minigame::before {
+#minigame::before,
+#letter::before {
   content: "";
   position: absolute;
   top: -5%;
@@ -238,7 +240,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   animation: enchantGlow 1.5s infinite alternate;
 }
 
-/* Red Ribbon Strap */
 .paper-item::before {
   content: "";
   position: absolute;
@@ -251,7 +252,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   border-right: 2px solid #7f1d1d;
 }
 
-/* Gold Buckle */
 .paper-item::after {
   content: "";
   position: absolute;
@@ -271,25 +271,94 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 .chest-wrapper.open .paper-item { opacity: 1; transform: translateY(-55px) scale(1.3); }
 
-/* LETTER SECTION */
-#letter { background: #181818; overflow-y: auto; }
-.letter-paper {
-  width: min(700px, 94vw);
-  min-height: 500px;
-  padding: 35px;
-  background: #fff3d6;
-  color: #38271c;
-  text-align: left;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px #000;
+/* MINECRAFT BOOK & QUILL THEMED LETTER UI */
+#letter { 
+  align-items: center;
+  user-select: text;
+  padding: 20px 10px;
 }
 
-.letter-paper h2 { text-align: center; font-size: 32px; }
-.letter-paper p { white-space: pre-line; line-height: 1.8; font-size: 16px; }
+.letter-paper {
+  width: min(650px, 92vw);
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 30px 25px;
+  background: #f1e4c3;
+  color: #1c120c;
+  text-align: left;
+  border: 8px solid #4a2f13;
+  box-shadow: 
+    inset 0 0 0 4px #8c5d2b,
+    0 0 0 4px #261608,
+    0 15px 35px rgba(0, 0, 0, 0.85);
+  margin: auto;
+  position: relative;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  -webkit-overflow-scrolling: touch;
+}
+
+.letter-paper::before,
+.letter-paper::after {
+  content: "";
+  position: sticky;
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: #facc15;
+  border: 2px solid #713f12;
+  z-index: 5;
+}
+
+.letter-paper::before {
+  top: -15px;
+  left: -15px;
+  float: left;
+  margin-bottom: -14px;
+}
+
+.letter-paper::after {
+  top: -15px;
+  right: -15px;
+  float: right;
+  margin-bottom: -14px;
+}
+
+.letter-paper h2 {
+  text-align: center;
+  font-size: clamp(22px, 5vw, 28px);
+  margin-top: 5px;
+  margin-bottom: 20px;
+  color: #3b220c;
+  text-shadow: 1px 1px 0px #fff;
+  border-bottom: 3px dashed #b89868;
+  padding-bottom: 10px;
+}
+
+.letter-paper p {
+  white-space: pre-line;
+  line-height: 1.7;
+  font-size: clamp(14px, 3.8vw, 16px);
+  margin-bottom: 0;
+  color: #2b180a;
+}
+
+/* Custom Minecraft Stone Scrollbar for Letter */
+.letter-paper::-webkit-scrollbar {
+  width: 10px;
+}
+.letter-paper::-webkit-scrollbar-track {
+  background: #c7b38d;
+  border-left: 2px solid #8c5d2b;
+}
+.letter-paper::-webkit-scrollbar-thumb {
+  background: #5c3a1e;
+  border: 2px solid #2b180a;
+}
 
 @media(max-width:550px) {
   #timer { grid-template-columns: repeat(2,1fr); }
-  .letter-paper { padding: 25px 20px; }
+  .letter-paper { padding: 20px 15px; max-height: 85vh; }
 }
 
 @keyframes cakeZoom {
@@ -300,6 +369,11 @@ button { font-family: inherit; border: none; cursor: pointer; }
 </head>
 
 <body>
+
+<!-- MINECRAFT BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://ia800900.us.archive.org/24/items/MinecraftBackgroundMusic/MinecraftBackgroundMusic.mp3" type="audio/mpeg">
+</audio>
 
 <div class="stars-container" id="stars"></div>
 
@@ -358,7 +432,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 <!-- LETTER -->
 <section id="letter" class="screen">
   <div class="letter-paper">
-    <h2>💌 A Letter For You</h2>
+    <h2>📖 Book & Quill Letter</h2>
     <p>
 Happy birthday to my beautiful wifey, my honey boo bear, my sweetheart, my Disney princess, my cutiepatotieehoneybunchsugarplumplum, my gorgeous lovey, my prettiest lablab ko—in short my baby ko. Today is your special day. I made this digital website because you are so special to me.
 
@@ -397,6 +471,14 @@ const minutes = document.getElementById("minutes");
 const seconds = document.getElementById("seconds");
 const startButton = document.getElementById("startButton");
 const statusText = document.getElementById("status");
+const bgMusic = document.getElementById("bgMusic");
+
+function startMusic() {
+  if (bgMusic.paused) {
+    bgMusic.volume = 0.35; // Soft relax volume
+    bgMusic.play().catch(e => console.log("Music play blocked:", e));
+  }
+}
 
 function updateCountdown() {
   const now = new Date();
@@ -429,10 +511,12 @@ function showScreen(id) {
 }
 
 startButton.onclick = function() {
+  startMusic();
   if (new Date() >= birthday) showScreen("cake");
 };
 
 document.getElementById("testButton").onclick = function() {
+  startMusic();
   showScreen("cake");
 };
 
@@ -534,7 +618,7 @@ chests.forEach((chest, idx) => {
 
 window.addEventListener('resize', positionChests);
 
-/* SOUND */
+/* SOUND EFFECTS & MUSIC TOGGLE */
 let audioContext = null;
 let soundOn = false;
 
@@ -559,8 +643,14 @@ function playSound(freq = 600, type = "square", duration = 0.08) {
 
 document.getElementById("soundButton").onclick = function() {
   soundOn = !soundOn;
-  this.textContent = soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
-  if (soundOn) playSound(520, "square", 0.1);
+  if (soundOn) {
+    this.textContent = "🔊 SOUND ON";
+    startMusic();
+    playSound(520, "square", 0.1);
+  } else {
+    this.textContent = "🔇 SOUND OFF";
+    bgMusic.pause();
+  }
 };
 
 updateCountdown();
