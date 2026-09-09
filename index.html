@@ -221,19 +221,54 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .chest-wrapper.open .minecraft-chest { background: #5c3a1e; transform: scale(1.1); }
 .chest-wrapper.open .minecraft-chest::after { top: 10px; height: 6px; background: #201008; }
 
+/* MINECRAFT ENCHANTED BOOK ITEM */
 .paper-item {
   position: absolute;
-  width: 40px; height: 50px;
-  background: #f0f0e0;
-  border: 3px solid #111;
+  width: 42px;
+  height: 50px;
+  background: #731e32;
+  border: 3px solid #2b0e18;
+  border-radius: 4px;
   opacity: 0;
   z-index: 10;
   pointer-events: none;
   transform: scale(0.3);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 0 15px #d946ef, 0 0 25px #a855f7;
+  animation: enchantGlow 1.5s infinite alternate;
 }
 
-.paper-item::after { content: "💌"; font-size: 18px; display: block; margin-top: 8px; }
+/* Red Ribbon Strap */
+.paper-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 13px;
+  width: 11px;
+  height: 100%;
+  background: #dc2626;
+  border-left: 2px solid #7f1d1d;
+  border-right: 2px solid #7f1d1d;
+}
+
+/* Gold Buckle */
+.paper-item::after {
+  content: "";
+  position: absolute;
+  top: 19px;
+  left: 10px;
+  width: 17px;
+  height: 8px;
+  background: #facc15;
+  border: 2px solid #854d0e;
+  border-radius: 2px;
+}
+
+@keyframes enchantGlow {
+  0% { box-shadow: 0 0 10px #c084fc, 0 0 20px #a855f7; }
+  100% { box-shadow: 0 0 20px #f0abfc, 0 0 35px #e879f9; }
+}
+
 .chest-wrapper.open .paper-item { opacity: 1; transform: translateY(-55px) scale(1.3); }
 
 /* LETTER SECTION */
@@ -302,7 +337,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 <!-- CHEST MINI GAME -->
 <section id="minigame" class="screen">
-  <div class="game-title" id="gameInstruction">💌 Your letter has been hidden in one of the chests...</div>
+  <div class="game-title" id="gameInstruction">📖 The Enchanted Book is hidden in one of the chests...</div>
 
   <div class="chests-container" id="chestsContainer">
     <div class="chest-wrapper" id="chest0">
@@ -325,21 +360,17 @@ button { font-family: inherit; border: none; cursor: pointer; }
   <div class="letter-paper">
     <h2>💌 A Letter For You</h2>
     <p>
-Dear Baby,
+Happy birthday to my beautiful wifey, my honey boo bear, my sweetheart, my Disney princess, my cutiepatotieehoneybunchsugarplumplum, my gorgeous lovey, my prettiest lablab ko—in short my baby ko. Today is your special day. I made this digital website because you are so special to me.
 
-Happy Birthday! 🎉
+I just wanted to say happy, happy birthday, baby! I love you. I hope this new chapter of your life will be filled with happiness, love, and peace. I wish that all your dreams come true, and I pray that God gives you the strength and courage to face everything that comes your way.
 
-Today is your special day, and I hope this little surprise makes you smile.
+I know there will be many more challenges ahead of you, and there are still many things you want to improve in your life, so I want to tell you na please don't give up, owkieee? If you ever need support, I'm always here for you para i-support ka, encourage ka, and i-cheer ikaw.
 
-I hope this new chapter of your life brings you happiness, beautiful memories, and many reasons to keep smiling.
+One of my wishes is that someday, you can celebrate your birthday with me. I want to make beautiful memories with you, baby. Sana dumating na yung time na hindi na tayo kailangan mag celebrate from afar, because I'm here besides you na.
 
-Always remember that you are special and that you deserve all the good things life has to offer.
+I'm glad na super duper na-appreciate mo yung binigay ko sa'yo, baby ko. I really, really appreciate you too, baby. I would give you anything I could just to make you happy because you are so special to me. Maramdaman ko lang na masaya ka, masaya na rin ako super. You are the one who always makes me happy palagi, I love you so much, talaga baby ko.
 
-Enjoy your day, baby. Eat lots of cake, make a wish, and have the happiest birthday. ❤️
-
-Happy Birthday once again! 🎂✨
-
-— From someone who made this little world for you ♡
+Once again, happy, happy birthday to my prettiest wifey, my sugar plum plum, in the whole world! Happy 16th birthday, baby! I hope you have the most wonderful birthday ever. I love you always. Mwuah, mwuah, mwuah, mwuah, mwuah!
     </p>
   </div>
 </section>
@@ -435,7 +466,7 @@ function startChestGame() {
   showScreen("minigame");
   gameInteractive = false;
   isShuffling = true;
-  instruction.textContent = "💌 Your letter has been hidden in one of the chests...";
+  instruction.textContent = "📖 The Enchanted Book is hidden in one of the chests...";
   
   chests.forEach(c => c.classList.remove("open", "shake"));
   positions = [0, 1, 2];
@@ -463,7 +494,7 @@ function startChestGame() {
       if (shuffleCount >= maxShuffles) {
         clearInterval(shuffleInterval);
         setTimeout(() => {
-          instruction.textContent = "🔎 Find the chest containing your letter!";
+          instruction.textContent = "🔎 Find the chest containing the Enchanted Book!";
           isShuffling = false;
           gameInteractive = true;
         }, 500);
@@ -483,7 +514,7 @@ chests.forEach((chest, idx) => {
     if (idx === correctChestIndex) {
       gameInteractive = false;
       chest.classList.add("open");
-      instruction.textContent = "✨ You found it!";
+      instruction.textContent = "✨ You found the Enchanted Book!";
       playSound(880, "square", 0.2);
 
       setTimeout(() => {
@@ -537,5 +568,5 @@ setInterval(updateCountdown, 1000);
 </script>
 
 </body>
-</html>
-
+  </html>
+  
