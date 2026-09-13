@@ -19,7 +19,6 @@ body {
   user-select: none;
 }
 
-/* ALL SCREENS */
 .screen {
   display: none;
   min-height: 100vh;
@@ -36,19 +35,12 @@ body {
   display: flex;
 }
 
-/* MINECRAFT BACKGROUND */
-#countdown,
-#cake,
-#minigame,
-#letter {
+#countdown, #cake, #minigame, #letter {
   position: relative;
   overflow: hidden;
 }
 
-#countdown::before,
-#cake::before,
-#minigame::before,
-#letter::before {
+#countdown::before, #cake::before, #minigame::before, #letter::before {
   content: "";
   position: absolute;
   top: -5%;
@@ -68,7 +60,6 @@ body {
   100% { transform: scale(1.03) translate(15px, 5px); }
 }
 
-/* SHOOTING STARS */
 .stars-container {
   position: fixed;
   top: 0;
@@ -95,7 +86,6 @@ body {
   100% { transform: translateX(-600px) translateY(600px) rotate(-45deg); opacity: 0; }
 }
 
-/* CARD & BUTTONS */
 .card {
   width: min(700px, 95vw);
   padding: 35px 20px;
@@ -143,10 +133,23 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
 .sound { margin-bottom: 12px; background: rgba(255,255,255,.15); }
 
+.cute-sticker {
+  width: 90px;
+  height: auto;
+  margin: 10px auto -5px;
+  display: block;
+  animation: floatSticker 2.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0px 5px 12px rgba(0,0,0,0.6));
+}
+
+@keyframes floatSticker {
+  0% { transform: translateY(0px) rotate(-3deg); }
+  100% { transform: translateY(-12px) rotate(3deg); }
+}
+
 #cake { flex-direction: column; }
 .cake-message { font-size: clamp(20px,5vw,30px); line-height: 1.5; text-shadow: 2px 3px 5px #000; }
 
-/* MINI-GAME SECTION */
 #minigame { flex-direction: column; }
 .game-title {
   font-size: clamp(16px, 4vw, 24px);
@@ -223,7 +226,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .chest-wrapper.open .minecraft-chest { background: #5c3a1e; transform: scale(1.1); }
 .chest-wrapper.open .minecraft-chest::after { top: 10px; height: 6px; background: #201008; }
 
-/* MINECRAFT ENCHANTED BOOK ITEM */
 .paper-item {
   position: absolute;
   width: 42px;
@@ -269,9 +271,30 @@ button { font-family: inherit; border: none; cursor: pointer; }
   100% { box-shadow: 0 0 20px #f0abfc, 0 0 35px #e879f9; }
 }
 
-.chest-wrapper.open .paper-item { opacity: 1; transform: translateY(-55px) scale(1.3); }
+.cat-item {
+  position: absolute;
+  width: 55px;
+  height: auto;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transform: scale(0.3);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));
+}
 
-/* MINECRAFT BOOK & QUILL THEMED LETTER UI */
+.chest-wrapper.open-wrong .cat-item {
+  opacity: 1;
+  animation: floatCat 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes floatCat {
+  0% { transform: translateY(-50px) scale(1.2) rotate(-5deg); }
+  100% { transform: translateY(-62px) scale(1.25) rotate(5deg); }
+}
+
+.chest-wrapper.open-correct .paper-item { opacity: 1; transform: translateY(-55px) scale(1.3); }
+
 #letter { 
   align-items: center;
   user-select: text;
@@ -343,7 +366,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   color: #2b180a;
 }
 
-/* Custom Minecraft Stone Scrollbar for Letter */
 .letter-paper::-webkit-scrollbar {
   width: 10px;
 }
@@ -370,19 +392,19 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 <body>
 
-<!-- MINECRAFT BACKGROUND MUSIC -->
 <audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <div class="stars-container" id="stars"></div>
 
-<!-- COUNTDOWN -->
 <section id="countdown" class="screen active">
   <div class="card">
     <div class="small-title">✦ MALUNGGAY WORLD ✦</div>
     <h1>Your Special Day<br>is Coming</h1>
     <p class="subtitle">Something special is waiting for you. ♡</p>
+
+    <img src="sticker.png" alt="Cute Pixel Character" class="cute-sticker">
 
     <div id="timer">
       <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
@@ -391,14 +413,13 @@ button { font-family: inherit; border: none; cursor: pointer; }
       <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
     </div>
 
-    <p id="status">Wait until September 21, 2026</p>
+    <p id="status">🎉 It's your birthday! Your world is ready.</p>
 
     <button class="btn sound" id="soundButton">🔊</button><br><br>
-    <button class="btn" id="startButton" disabled>START</button>
+    <button class="btn" id="startButton">START</button>
   </div>
 </section>
 
-<!-- CAKE -->
 <section id="cake" class="screen">
   <div class="cake-message">Here's a cake for you,<br>take a wish.</div>
   
@@ -408,7 +429,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
 </section>
 
-<!-- CHEST MINI GAME -->
 <section id="minigame" class="screen">
   <div class="game-title" id="gameInstruction">📖 The Enchanted Book is hidden in one of the chests...</div>
 
@@ -416,19 +436,21 @@ button { font-family: inherit; border: none; cursor: pointer; }
     <div class="chest-wrapper" id="chest0">
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
+      <img src="sticker.png" class="cat-item" alt="Cute Cat">
     </div>
     <div class="chest-wrapper" id="chest1">
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
+      <img src="sticker.png" class="cat-item" alt="Cute Cat">
     </div>
     <div class="chest-wrapper" id="chest2">
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
+      <img src="sticker.png" class="cat-item" alt="Cute Cat">
     </div>
   </div>
 </section>
 
-<!-- LETTER -->
 <section id="letter" class="screen">
   <div class="letter-paper">
     <h2>📖 Book & Quill Letter</h2>
@@ -439,7 +461,7 @@ I just wanted to say happy, happy birthday, baby! I love you. I hope this new ch
 
 I know there will be many more challenges ahead of you, and there are still many things you want to improve in your life, so I want to tell you na please don't give up, owkieee? If you ever need support, I'm always here for you para i-support ka, encourage ka, and i-cheer ikaw.
 
-One of my wishes is that someday, you can celebrate your birthday with me. I want to make beautiful memories with you, baby. Sana dumating na yung time na hindi na tayo kailangan mag celebrate from afar, because I'm here besides you na.
+One of my wishes is that someday, you can celebrate your birthday with me. I want to make beautiful memories with you, baby. Sana dumating na yung time na hindi na tayo kailangan mag celebrate from afar, because I'm here beside you na.
 
 I'm glad na super duper na-appreciate mo yung binigay ko sa'yo, baby ko. I really, really appreciate you too, baby. I would give you anything I could just to make you happy because you are so special to me. Maramdaman ko lang na masaya ka, masaya na rin ako super. You are the one who always makes me happy palagi, I love you so much, talaga baby ko.
 
@@ -463,7 +485,8 @@ function createShootingStars() {
 }
 createShootingStars();
 
-const birthday = new Date("2026-09-21T00:00:00+08:00");
+// TEST MODE DATE (SEPTEMBER 21, 2020)
+const birthday = new Date("2020-09-21T00:00:00+08:00");
 const days = document.getElementById("days");
 const hours = document.getElementById("hours");
 const minutes = document.getElementById("minutes");
@@ -474,34 +497,18 @@ const bgMusic = document.getElementById("bgMusic");
 
 function startMusic() {
   if (bgMusic.paused) {
-    bgMusic.volume = 0.35; // Soft relax volume
+    bgMusic.volume = 0.35;
     bgMusic.play().catch(e => console.log("Music play blocked:", e));
   }
 }
 
 function updateCountdown() {
-  const now = new Date();
-  const difference = birthday - now;
-
-  if (difference <= 0) {
-    days.textContent = "00";
-    hours.textContent = "00";
-    minutes.textContent = "00";
-    seconds.textContent = "00";
-    startButton.disabled = false;
-    statusText.textContent = "🎉 It's your birthday! Your world is ready.";
-    return;
-  }
-
-  const d = Math.floor(difference / 86400000);
-  const h = Math.floor(difference / 3600000) % 24;
-  const m = Math.floor(difference / 60000) % 60;
-  const s = Math.floor(difference / 1000) % 60;
-
-  days.textContent = String(d).padStart(2,"0");
-  hours.textContent = String(h).padStart(2,"0");
-  minutes.textContent = String(m).padStart(2,"0");
-  seconds.textContent = String(s).padStart(2,"0");
+  days.textContent = "00";
+  hours.textContent = "00";
+  minutes.textContent = "00";
+  seconds.textContent = "00";
+  startButton.disabled = false;
+  statusText.textContent = "🎉 It's your birthday! Your world is ready.";
 }
 
 function showScreen(id) {
@@ -511,12 +518,9 @@ function showScreen(id) {
 
 startButton.onclick = function() {
   startMusic();
-  if (new Date() >= birthday) {
-    showScreen("cake");
-  }
+  showScreen("cake");
 };
 
-/* MINI GAME JAVASCRIPT */
 let correctChestIndex = 1;
 let isShuffling = false;
 let gameInteractive = false;
@@ -548,7 +552,7 @@ function startChestGame() {
   isShuffling = true;
   instruction.textContent = "📖 The Enchanted Book is hidden in one of the chests...";
   
-  chests.forEach(c => c.classList.remove("open", "shake"));
+  chests.forEach(c => c.classList.remove("open", "open-correct", "open-wrong", "shake"));
   positions = [0, 1, 2];
   correctChestIndex = Math.floor(Math.random() * 3);
   
@@ -593,7 +597,7 @@ chests.forEach((chest, idx) => {
 
     if (idx === correctChestIndex) {
       gameInteractive = false;
-      chest.classList.add("open");
+      chest.classList.add("open", "open-correct");
       instruction.textContent = "✨ You found the Enchanted Book!";
       playSound(880, "square", 0.2);
 
@@ -601,8 +605,10 @@ chests.forEach((chest, idx) => {
         showScreen("letter");
       }, 1800);
     } else {
-      chest.classList.add("shake");
-      instruction.textContent = "❌ Not here! Try again.";
+      if (chest.classList.contains("open-wrong")) return;
+
+      chest.classList.add("open", "open-wrong", "shake");
+      instruction.textContent = "Oops, please try again... 🐱";
       playSound(250, "sawtooth", 0.15);
 
       setTimeout(() => {
@@ -614,7 +620,6 @@ chests.forEach((chest, idx) => {
 
 window.addEventListener('resize', positionChests);
 
-/* SOUND EFFECTS & MUSIC TOGGLE */
 let audioContext = null;
 let soundOn = false;
 
@@ -650,7 +655,6 @@ document.getElementById("soundButton").onclick = function() {
 };
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
 </script>
 
 </body>
