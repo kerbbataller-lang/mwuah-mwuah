@@ -6,10 +6,7 @@
 <title>Happy Birthday, Baby 🎂</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
+* { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: 'Courier New', Courier, monospace;
@@ -18,31 +15,22 @@ body {
   background-color: #120a05;
   user-select: none;
 }
-
-/* ANIMATED MOVING BACKGROUND */
 .bg-animation {
   position: fixed;
-  top: -5%;
-  left: -5%;
-  width: 110vw;
-  height: 110vh;
+  top: -5%; left: -5%;
+  width: 110vw; height: 110vh;
   z-index: 0;
-  background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url('background.jpg'),
-    url('https://raw.githubusercontent.com/kerbbataller-lang/kerbbataller-lang.github.io/main/background.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('background.jpg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   animation: bgMove 20s ease-in-out infinite alternate;
 }
-
 @keyframes bgMove {
   0% { transform: scale(1) translate(0, 0); }
   50% { transform: scale(1.08) translate(-15px, -10px); }
   100% { transform: scale(1.04) translate(15px, 10px); }
 }
-
 .screen {
   display: none;
   min-height: 100vh;
@@ -55,181 +43,76 @@ body {
   z-index: 2;
   background: rgba(0, 0, 0, 0.45);
 }
-
-.screen.active {
-  display: flex;
-}
-
-/* Background Shooting Stars */
+.screen.active { display: flex; }
 .stars-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 1; overflow: hidden;
 }
-
 .shooting-star {
-  position: absolute;
-  width: 120px;
-  height: 2px;
+  position: absolute; width: 120px; height: 2px;
   background: linear-gradient(90deg, rgba(255,255,255,1), transparent);
-  animation: shoot 3s linear infinite;
-  opacity: 0;
+  animation: shoot 3s linear infinite; opacity: 0;
 }
-
 @keyframes shoot {
   0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
   70% { opacity: 1; }
   100% { transform: translateX(-600px) translateY(600px) rotate(-45deg); opacity: 0; }
 }
-
-/* COMPACT CARD BOX */
 .card {
-  width: min(420px, 92vw);
-  padding: 18px 15px;
-  background: rgba(20, 13, 9, 0.82);
-  border-radius: 14px;
+  width: min(420px, 92vw); padding: 18px 15px;
+  background: rgba(20, 13, 9, 0.82); border-radius: 14px;
   border: 3px solid #8c5d2b;
   box-shadow: inset 0 0 0 3px #3d2510, 0 8px 30px rgba(0,0,0,0.85);
   backdrop-filter: blur(2px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex; flex-direction: column; align-items: center;
 }
-
-.front-cat-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.front-cat-img {
-  width: 65px;
-  height: auto;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-}
-
+.front-cat-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
+.front-cat-img { width: 65px; height: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
 .small-title { letter-spacing: 3px; font-size: 11px; opacity: .9; color: #facc15; }
 h1 { font-size: clamp(22px, 5.2vw, 36px); margin: 6px 0; font-style: italic; text-shadow: 2px 2px 8px #000; line-height: 1.2; }
 .subtitle { font-size: 12px; opacity: .85; margin-bottom: 12px; }
-
-#timer {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 6px;
-  margin: 12px 0;
-  width: 100%;
-}
-
-.time {
-  padding: 8px 2px;
-  border: 2px solid #8c5d2b;
-  border-radius: 6px;
-  background: rgba(15, 8, 4, 0.75);
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
-}
-
+#timer { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin: 12px 0; width: 100%; }
+.time { padding: 8px 2px; border: 2px solid #8c5d2b; border-radius: 6px; background: rgba(15, 8, 4, 0.75); }
 .time strong { display: block; font-size: clamp(18px, 4.5vw, 28px); color: #f43f5e; line-height: 1.1; }
 .time span { font-size: 8px; letter-spacing: 1px; }
-
-#status {
-  font-size: 12px;
-  margin: 10px 0;
-}
-
+#status { font-size: 12px; margin: 10px 0; }
 button { font-family: inherit; border: none; cursor: pointer; }
 .btn {
-  padding: 10px 24px;
-  border-radius: 8px;
-  background: #3b82f6;
-  border: 2px solid #1d4ed8;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  box-shadow: 0 4px 0px #1e3a8a;
-  transition: transform 0.1s;
+  padding: 10px 24px; border-radius: 8px; background: #3b82f6;
+  border: 2px solid #1d4ed8; color: white; font-weight: bold; font-size: 14px;
+  box-shadow: 0 4px 0px #1e3a8a; transition: transform 0.1s;
 }
-
 .btn:active { transform: translateY(3px); box-shadow: 0 1px 0px #1e3a8a; }
-
-.cat-img {
-  width: 55px;
-  height: auto;
-  display: block;
-}
-
+.btn:disabled { background: #4b5563; border-color: #374151; box-shadow: none; opacity: 0.6; cursor: not-allowed; }
+.cat-img { width: 55px; height: auto; display: block; }
 #cake { flex-direction: column; }
 .cake-message { font-size: clamp(18px,4.5vw,26px); line-height: 1.4; text-shadow: 2px 3px 5px #000; }
-
 #minigame { flex-direction: column; }
 .game-title {
-  font-size: clamp(14px, 3.5vw, 20px);
-  margin-bottom: 20px;
-  background: rgba(20, 12, 8, 0.88);
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 3px solid #6b4727;
-  text-shadow: 2px 2px #000;
-  max-width: 90vw;
+  font-size: clamp(14px, 3.5vw, 20px); margin-bottom: 20px;
+  background: rgba(20, 12, 8, 0.88); padding: 10px 16px; border-radius: 8px;
+  border: 3px solid #6b4727; text-shadow: 2px 2px #000; max-width: 90vw;
 }
-
 .chests-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 420px;
-  height: 200px;
-  position: relative;
-  margin: 10px auto 20px;
+  display: flex; justify-content: center; align-items: center;
+  width: 100%; max-width: 420px; height: 200px; position: relative; margin: 10px auto 20px;
 }
-
 .chest-wrapper {
-  position: absolute;
-  width: 75px;
-  height: 75px;
-  cursor: pointer;
+  position: absolute; width: 75px; height: 75px; cursor: pointer;
   transition: left 0.4s ease-in-out, transform 0.2s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex; justify-content: center; align-items: center;
 }
-
 .minecraft-chest {
-  width: 70px;
-  height: 70px;
-  background: #8b5a2b;
-  border: 4px solid #3d2314;
-  box-shadow: inset 0 0 0 3px #a66d3b, 0 8px 15px rgba(0,0,0,0.6);
-  position: relative;
-  border-radius: 4px;
+  width: 70px; height: 70px; background: #8b5a2b; border: 4px solid #3d2314;
+  box-shadow: inset 0 0 0 3px #a66d3b, 0 8px 15px rgba(0,0,0,0.6); position: relative; border-radius: 4px;
 }
-
 .minecraft-chest::before {
-  content: "";
-  position: absolute;
-  top: 28px; left: 24px;
-  width: 12px; height: 14px;
-  background: #bfbfbf;
-  border: 2px solid #3a3a3a;
-  border-radius: 2px;
-  z-index: 3;
+  content: ""; position: absolute; top: 28px; left: 24px; width: 12px; height: 14px;
+  background: #bfbfbf; border: 2px solid #3a3a3a; border-radius: 2px; z-index: 3;
 }
-
 .minecraft-chest::after {
-  content: "";
-  position: absolute;
-  top: 32px; left: 0;
-  width: 100%; height: 4px;
-  background: #3d2314;
-  z-index: 2;
+  content: ""; position: absolute; top: 32px; left: 0; width: 100%; height: 4px; background: #3d2314; z-index: 2;
 }
-
 .chest-wrapper.shake { animation: shake 0.4s ease-in-out; }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -238,167 +121,58 @@ button { font-family: inherit; border: none; cursor: pointer; }
   60% { transform: translateX(-6px); }
   80% { transform: translateX(6px); }
 }
-
 .chest-wrapper.open .minecraft-chest { background: #5c3a1e; transform: scale(1.1); }
 .chest-wrapper.open .minecraft-chest::after { top: 10px; height: 6px; background: #201008; }
-
 .paper-item {
-  position: absolute;
-  width: 42px;
-  height: 50px;
-  background: #731e32;
-  border: 3px solid #2b0e18;
-  border-radius: 4px;
-  opacity: 0;
-  z-index: 10;
-  pointer-events: none;
-  transform: scale(0.3);
+  position: absolute; width: 42px; height: 50px; background: #731e32;
+  border: 3px solid #2b0e18; border-radius: 4px; opacity: 0; z-index: 10;
+  pointer-events: none; transform: scale(0.3);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 0 15px #d946ef, 0 0 25px #a855f7;
 }
-
 .paper-item::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 13px;
-  width: 10px; height: 100%;
-  background: #dc2626;
-  border-left: 2px solid #7f1d1d;
-  border-right: 2px solid #7f1d1d;
+  content: ""; position: absolute; top: 0; left: 13px; width: 10px; height: 100%;
+  background: #dc2626; border-left: 2px solid #7f1d1d; border-right: 2px solid #7f1d1d;
 }
-
-.chest-wrapper.open-correct .paper-item {
-  opacity: 1;
-  transform: translateY(-65px) scale(1.3);
-}
-
-/* MINECRAFT PAPER LETTER BOX FOR WRONG CHEST */
+.chest-wrapper.open-correct .paper-item { opacity: 1; transform: translateY(-65px) scale(1.3); }
 .open-book-container {
-  position: absolute;
-  top: -160px;
-  width: 165px;
-  height: 140px;
-  background: #f1e4c3;
-  color: #1c120c;
-  border: 4px solid #4a2f13;
+  position: absolute; top: -160px; width: 165px; height: 140px;
+  background: #f1e4c3; color: #1c120c; border: 4px solid #4a2f13;
   box-shadow: inset 0 0 0 2px #8c5d2b, 0 8px 20px rgba(0, 0, 0, 0.85);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 25;
-  transform: scale(0.2) translateY(50px);
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding: 8px 6px;
-  border-radius: 4px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; z-index: 25; transform: scale(0.2) translateY(50px);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); padding: 8px 6px; border-radius: 4px;
 }
-
-.chest-wrapper.open-wrong .open-book-container {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
+.chest-wrapper.open-wrong .open-book-container { opacity: 1; transform: scale(1) translateY(0); }
 .cat-name-tag {
-  background: #facc15;
-  color: #121216;
-  font-size: 10px;
-  font-weight: 900;
-  padding: 2px 8px;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.8);
-  white-space: nowrap;
-  margin-bottom: 2px;
-  border: 1px solid #78350f;
-  letter-spacing: 1px;
-  z-index: 2;
+  background: #facc15; color: #121216; font-size: 10px; font-weight: 900;
+  padding: 2px 8px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.8);
+  white-space: nowrap; margin-bottom: 2px; border: 1px solid #78350f; letter-spacing: 1px; z-index: 2;
 }
-
 .try-again-tag {
-  background: #ef4444;
-  color: white;
-  font-size: 8px;
-  font-weight: bold;
-  padding: 3px 6px;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-  text-align: center;
-  margin-top: 4px;
-  border: 1px solid #ffffff;
-  z-index: 2;
-  line-height: 1.2;
+  background: #ef4444; color: white; font-size: 8px; font-weight: bold;
+  padding: 3px 6px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  text-align: center; margin-top: 4px; border: 1px solid #ffffff; z-index: 2; line-height: 1.2;
 }
-
-.retry-btn {
-  display: none;
-  margin-top: 15px;
-  background: #f59e0b;
-  border: 2px solid #b45309;
-  box-shadow: 0 4px 0px #78350f;
-}
-
-.retry-btn:active {
-  box-shadow: 0 1px 0px #78350f;
-}
-
-#letter { 
-  align-items: center;
-  user-select: text;
-  padding: 15px 10px;
-}
-
+.retry-btn { display: none; margin-top: 15px; background: #f59e0b; border: 2px solid #b45309; box-shadow: 0 4px 0px #78350f; }
+.retry-btn:active { box-shadow: 0 1px 0px #78350f; }
+#letter { align-items: center; user-select: text; padding: 15px 10px; }
 .letter-paper {
-  width: min(600px, 92vw);
-  max-height: 82vh;
-  overflow-y: auto;
-  padding: 25px 20px;
-  background: #f1e4c3;
-  color: #1c120c;
-  text-align: left;
-  border: 6px solid #4a2f13;
-  box-shadow: 
-    inset 0 0 0 3px #8c5d2b,
-    0 0 0 3px #261608,
-    0 15px 35px rgba(0, 0, 0, 0.85);
-  margin: auto;
-  position: relative;
-  font-weight: bold;
-  -webkit-overflow-scrolling: touch;
+  width: min(600px, 92vw); max-height: 82vh; overflow-y: auto; padding: 25px 20px;
+  background: #f1e4c3; color: #1c120c; text-align: left; border: 6px solid #4a2f13;
+  box-shadow: inset 0 0 0 3px #8c5d2b, 0 0 0 3px #261608, 0 15px 35px rgba(0, 0, 0, 0.85);
+  margin: auto; position: relative; font-weight: bold; -webkit-overflow-scrolling: touch;
 }
-
 .letter-paper h2 {
-  text-align: center;
-  font-size: clamp(18px, 4.5vw, 24px);
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: #3b220c;
-  border-bottom: 2px dashed #b89868;
-  padding-bottom: 8px;
+  text-align: center; font-size: clamp(18px, 4.5vw, 24px); margin-top: 0; margin-bottom: 15px;
+  color: #3b220c; border-bottom: 2px dashed #b89868; padding-bottom: 8px;
 }
-
-.letter-paper p {
-  white-space: pre-line;
-  line-height: 1.6;
-  font-size: clamp(13px, 3.5vw, 15px);
-  margin-bottom: 0;
-  color: #2b180a;
-}
-
-@media(max-width:550px) {
-  .letter-paper { padding: 18px 12px; max-height: 85vh; }
-}
-
-@keyframes cakeZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
+.letter-paper p { white-space: pre-line; line-height: 1.6; font-size: clamp(13px, 3.5vw, 15px); margin-bottom: 0; color: #2b180a; }
+@keyframes cakeZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
 </style>
 </head>
-
 <body>
 
-<!-- MOVING BACKGROUND LAYER -->
 <div class="bg-animation"></div>
 
 <audio id="bgMusic" loop preload="auto">
@@ -407,7 +181,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 <div class="stars-container" id="stars"></div>
 
-<!-- COUNTDOWN SCREEN -->
 <section id="countdown" class="screen active">
   <div class="card">
     <div class="front-cat-container">
@@ -432,7 +205,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   </div>
 </section>
 
-<!-- CAKE SCREEN -->
 <section id="cake" class="screen">
   <div class="cake-message">Here's a cake for you,<br>take a wish.</div>
   
@@ -442,7 +214,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
 </section>
 
-<!-- MINI-GAME SCREEN -->
 <section id="minigame" class="screen">
   <div class="game-title" id="gameInstruction">📖 The Enchanted Book is hidden in one of the chests...</div>
 
@@ -481,7 +252,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   <button class="btn retry-btn" id="retryButton">Play Again 🔄</button>
 </section>
 
-<!-- LETTER SCREEN -->
 <section id="letter" class="screen">
   <div class="letter-paper">
     <h2>📖 Book & Quill Letter</h2>
@@ -502,7 +272,6 @@ Once again, happy, happy birthday to my prettiest wifey, my sugar plum plum, in 
 </section>
 
 <script>
-/* WEB AUDIO SOUND GENERATOR */
 let audioContext = null;
 
 function getAudioContext() {
@@ -515,7 +284,6 @@ function getAudioContext() {
   return audioContext;
 }
 
-// Auto-play music on any first user interaction
 function startMusic() {
   const bgMusic = document.getElementById("bgMusic");
   if (bgMusic.paused) {
@@ -528,7 +296,6 @@ function startMusic() {
 document.addEventListener('click', startMusic, { once: true });
 document.addEventListener('touchstart', startMusic, { once: true });
 
-// Retro Click Sound
 function playClickSound() {
   try {
     const ctx = getAudioContext();
@@ -546,7 +313,6 @@ function playClickSound() {
   } catch(e) {}
 }
 
-// Shuffle Sound
 function playShuffleSound() {
   try {
     const ctx = getAudioContext();
@@ -563,7 +329,6 @@ function playShuffleSound() {
   } catch(e) {}
 }
 
-// Wrong Chest Sound
 function playWrongSound() {
   try {
     const ctx = getAudioContext();
@@ -581,7 +346,6 @@ function playWrongSound() {
   } catch(e) {}
 }
 
-// Victory Sound
 function playVictorySound() {
   try {
     const ctx = getAudioContext();
@@ -602,7 +366,6 @@ function playVictorySound() {
   } catch(e) {}
 }
 
-/* BACKGROUND SHOOTING STARS */
 function createShootingStars() {
   const container = document.getElementById('stars');
   for (let i = 0; i < 6; i++) {
@@ -625,8 +388,7 @@ const startButton = document.getElementById("startButton");
 const statusText = document.getElementById("status");
 const retryBtn = document.getElementById("retryButton");
 
-// COUNTDOWN TIMER LOGIC
-const birthdayDate = new Date("September 14, 2026 00:00:00").getTime();
+const birthdayDate = new Date("September 21, 2026 00:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
@@ -652,8 +414,8 @@ function updateCountdown() {
   minutes.textContent = String(m).padStart(2, '0');
   seconds.textContent = String(s).padStart(2, '0');
 
-  startButton.disabled = false;
-  statusText.textContent = "🎉 It's your birthday! Your world is ready.";
+  startButton.disabled = true;
+  statusText.textContent = "⏳ Counting down to your special moment...";
 }
 
 setInterval(updateCountdown, 1000);
@@ -780,5 +542,3 @@ window.addEventListener('resize', positionChests);
 
 </body>
 </html>
-
- 
