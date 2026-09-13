@@ -36,7 +36,7 @@ body {
   display: flex;
 }
 
-/* Stars */
+/* Background Shooting Stars */
 .stars-container {
   position: fixed;
   top: 0;
@@ -111,7 +111,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .btn:active { transform: scale(0.95); }
 .sound { margin-bottom: 12px; background: rgba(255,255,255,.1); }
 
-/* --- ANIMATED FLOWER CAT (GENTLE BOBCAT & FLOAT) --- */
+/* --- GIF CAT CONTAINER --- */
 .cat-anim-wrapper {
   display: inline-block;
   margin: 10px auto 5px;
@@ -119,24 +119,10 @@ button { font-family: inherit; border: none; cursor: pointer; }
 }
 
 .cat-img {
-  width: 120px;
+  width: 130px;
   height: auto;
   display: block;
-  transform-origin: bottom center;
-  animation: catFlowerMotion 1.8s infinite alternate ease-in-out;
   filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.8));
-}
-
-@keyframes catFlowerMotion {
-  0% {
-    transform: rotate(-3deg) translateY(0);
-  }
-  50% {
-    transform: rotate(0deg) translateY(-6px) scale(1.03);
-  }
-  100% {
-    transform: rotate(3deg) translateY(-3px);
-  }
 }
 
 #cake { flex-direction: column; }
@@ -160,7 +146,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   align-items: center;
   width: 100%;
   max-width: 450px;
-  height: 180px;
+  height: 200px;
   position: relative;
   margin: 10px auto 30px;
 }
@@ -221,8 +207,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
 /* Enchanted Book Item */
 .paper-item {
   position: absolute;
-  width: 42px;
-  height: 50px;
+  width: 45px;
+  height: 52px;
   background: #731e32;
   border: 3px solid #2b0e18;
   border-radius: 4px;
@@ -237,8 +223,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .paper-item::before {
   content: "";
   position: absolute;
-  top: 0; left: 13px;
-  width: 11px; height: 100%;
+  top: 0; left: 14px;
+  width: 12px; height: 100%;
   background: #dc2626;
   border-left: 2px solid #7f1d1d;
   border-right: 2px solid #7f1d1d;
@@ -247,31 +233,32 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .paper-item::after {
   content: "";
   position: absolute;
-  top: 19px; left: 10px;
-  width: 17px; height: 8px;
+  top: 20px; left: 11px;
+  width: 18px; height: 8px;
   background: #facc15;
   border: 2px solid #854d0e;
   border-radius: 2px;
 }
 
+/* Lumalabas ang Enchanted Book sa chest */
 .chest-wrapper.open-correct .paper-item,
 .chest-wrapper.open-wrong .paper-item {
   opacity: 1;
-  transform: translateY(-55px) scale(1.2);
+  transform: translateY(-60px) scale(1.2);
 }
 
-/* Wrong Chest Cat Popup with "Try Again" Badge */
+/* --- WRONG CHEST POPUP: MALUNGGAY CAT INSIDE THE BOOK --- */
 .wrong-cat-container {
   position: absolute;
-  top: -110px;
+  top: -130px;
   display: flex;
   flex-direction: column;
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  z-index: 20;
-  transform: scale(0.4) translateY(20px);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 25;
+  transform: scale(0.3) translateY(30px);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .chest-wrapper.open-wrong .wrong-cat-container {
@@ -279,27 +266,43 @@ button { font-family: inherit; border: none; cursor: pointer; }
   transform: scale(1) translateY(0);
 }
 
+/* Name Tag: MALUNGGAY */
+.cat-name-tag {
+  background: #facc15;
+  color: #121216;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.8);
+  white-space: nowrap;
+  margin-bottom: 2px;
+  border: 1.5px solid #ffffff;
+  letter-spacing: 1px;
+}
+
+.wrong-cat-container .cat-img {
+  width: 80px;
+}
+
+/* Subtitle: Pls pls try again */
 .try-again-tag {
   background: #ef4444;
   color: white;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: bold;
   padding: 3px 8px;
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.6);
   white-space: nowrap;
-  margin-bottom: 2px;
+  margin-top: 2px;
   border: 1px solid #ffffff;
-  animation: popTag 0.5s ease-in-out infinite alternate;
+  animation: pulseTag 0.6s ease-in-out infinite alternate;
 }
 
-@keyframes popTag {
+@keyframes pulseTag {
   0% { transform: scale(0.95); }
   100% { transform: scale(1.05); }
-}
-
-.wrong-cat-container .cat-img {
-  width: 85px;
 }
 
 /* Letter Screen */
@@ -373,9 +376,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
     <h1>Your Special Day<br>is Coming</h1>
     <p class="subtitle">Something special is waiting for you. ♡</p>
 
-    <!-- Animated Pixel Cat with Flowers -->
+    <!-- Animated Pixel Cat GIF -->
     <div class="cat-anim-wrapper">
-      <img src="sticker.png" alt="Cute Pixel Cat with Flowers" class="cat-img">
+      <img src="sticker.gif" alt="Malunggay Animated Cat" class="cat-img">
     </div>
 
     <div id="timer">
@@ -412,8 +415,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
       <div class="wrong-cat-container">
-        <div class="try-again-tag">TRY AGAIN! 😸</div>
-        <img src="sticker.png" class="cat-img" alt="Cute Cat">
+        <div class="cat-name-tag">🐾 MALUNGGAY</div>
+        <img src="sticker.gif" class="cat-img" alt="Cute Cat GIF">
+        <div class="try-again-tag">Pls pls try again 😸</div>
       </div>
     </div>
 
@@ -422,8 +426,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
       <div class="wrong-cat-container">
-        <div class="try-again-tag">TRY AGAIN! 😸</div>
-        <img src="sticker.png" class="cat-img" alt="Cute Cat">
+        <div class="cat-name-tag">🐾 MALUNGGAY</div>
+        <img src="sticker.gif" class="cat-img" alt="Cute Cat GIF">
+        <div class="try-again-tag">Pls pls try again 😸</div>
       </div>
     </div>
 
@@ -432,8 +437,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
       <div class="wrong-cat-container">
-        <div class="try-again-tag">TRY AGAIN! 😸</div>
-        <img src="sticker.png" class="cat-img" alt="Cute Cat">
+        <div class="cat-name-tag">🐾 MALUNGGAY</div>
+        <img src="sticker.gif" class="cat-img" alt="Cute Cat GIF">
+        <div class="try-again-tag">Pls pls try again 😸</div>
       </div>
     </div>
   </div>
@@ -597,7 +603,7 @@ chests.forEach((chest, idx) => {
       if (chest.classList.contains("open-wrong")) return;
 
       chest.classList.add("open", "open-wrong", "shake");
-      instruction.textContent = "Oops! Maling chest! Try again... 😸";
+      instruction.textContent = "Oops! Si Malunggay ang lumabas! Pls try again... 😸";
       playSound(250, "sawtooth", 0.15);
 
       setTimeout(() => {
