@@ -599,7 +599,7 @@ chests.forEach((chest, idx) => {
       if (chest.classList.contains("open-wrong")) return;
 
       chest.classList.add("open", "open-wrong", "shake");
-      instruction.textContent = "Oops! Binuksan ang libro pero si Malunggay ang nasa loob! Pls try again... 😸";
+      instruction.textContent = "Malunggay is here!";
       playSound(250, "sawtooth", 0.15);
 
       setTimeout(() => {
@@ -649,4 +649,5 @@ updateCountdown();
 </script>
 
 </body>
-</html>
+        </html>
+  
