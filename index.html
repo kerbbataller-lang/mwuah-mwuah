@@ -12,10 +12,10 @@
 
 body {
   margin: 0;
-  font-family: Georgia, serif;
+  font-family: 'Courier New', Courier, monospace;
   color: white;
   overflow: hidden;
-  background: #0a0a0a;
+  background: #121216;
   user-select: none;
 }
 
@@ -29,37 +29,14 @@ body {
   padding: 20px;
   position: relative;
   z-index: 2;
+  background: radial-gradient(circle at center, #1a1a24 0%, #0d0d12 100%);
 }
 
 .screen.active {
   display: flex;
 }
 
-#countdown, #cake, #minigame, #letter {
-  position: relative;
-  overflow: hidden;
-}
-
-#countdown::before, #cake::before, #minigame::before, #letter::before {
-  content: "";
-  position: absolute;
-  top: -5%;
-  left: -5%;
-  width: 110%;
-  height: 110%;
-  background:
-    linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.58)),
-    url("background.jpg") center/cover no-repeat;
-  z-index: -1;
-  animation: moveTrees 18s ease-in-out infinite alternate;
-}
-
-@keyframes moveTrees {
-  0% { transform: scale(1) translate(0, 0); }
-  50% { transform: scale(1.06) translate(-15px, -10px); }
-  100% { transform: scale(1.03) translate(15px, 5px); }
-}
-
+/* Stars */
 .stars-container {
   position: fixed;
   top: 0;
@@ -88,63 +65,78 @@ body {
 
 .card {
   width: min(700px, 95vw);
-  padding: 35px 20px;
-  background: rgba(20,20,20,.65);
-  border-radius: 25px;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  padding: 30px 20px;
+  background: rgba(25, 25, 35, 0.85);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
 }
 
-.small-title { letter-spacing: 4px; font-size: 13px; opacity: .9; }
-h1 { font-size: clamp(38px, 8vw, 70px); margin: 10px 0; font-style: italic; text-shadow: 3px 4px 8px #000; }
-.subtitle { font-size: 15px; opacity: .9; }
+.small-title { letter-spacing: 4px; font-size: 13px; opacity: .9; color: #facc15; }
+h1 { font-size: clamp(30px, 6.5vw, 55px); margin: 10px 0; font-style: italic; text-shadow: 2px 2px 10px #000; }
+.subtitle { font-size: 14px; opacity: .8; }
 
 #timer {
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 10px;
-  margin: 30px 0;
+  margin: 25px 0;
 }
 
 .time {
-  padding: 18px 5px;
-  border: 1px solid rgba(255,255,255,.3);
+  padding: 15px 5px;
+  border: 1px solid rgba(255,255,255,.15);
   border-radius: 12px;
-  background: rgba(255,255,255,.12);
-  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+  background: rgba(255,255,255,.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,.4);
 }
 
-.time strong { display: block; font-size: clamp(28px, 7vw, 48px); }
+.time strong { display: block; font-size: clamp(24px, 6vw, 42px); color: #f43f5e; }
 .time span { font-size: 10px; letter-spacing: 2px; }
 
 button { font-family: inherit; border: none; cursor: pointer; }
 .btn {
   padding: 14px 30px;
   border-radius: 30px;
-  background: rgba(50,130,45,.9);
+  background: #2563eb;
   color: white;
   font-weight: bold;
   font-size: 16px;
-  box-shadow: 0 5px 15px #0008;
-  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  transition: transform 0.2s, background 0.2s;
 }
 
+.btn:hover { background: #1d4ed8; }
 .btn:active { transform: scale(0.95); }
-.btn:disabled { opacity: .45; cursor: not-allowed; }
-.sound { margin-bottom: 12px; background: rgba(255,255,255,.15); }
+.sound { margin-bottom: 12px; background: rgba(255,255,255,.1); }
 
-.cute-sticker {
-  width: 90px;
-  height: auto;
-  margin: 10px auto -5px;
-  display: block;
-  animation: floatSticker 2.5s ease-in-out infinite alternate;
-  filter: drop-shadow(0px 5px 12px rgba(0,0,0,0.6));
+/* --- ANIMATED FLOWER CAT (GENTLE BOBCAT & FLOAT) --- */
+.cat-anim-wrapper {
+  display: inline-block;
+  margin: 10px auto 5px;
+  position: relative;
 }
 
-@keyframes floatSticker {
-  0% { transform: translateY(0px) rotate(-3deg); }
-  100% { transform: translateY(-12px) rotate(3deg); }
+.cat-img {
+  width: 120px;
+  height: auto;
+  display: block;
+  transform-origin: bottom center;
+  animation: catFlowerMotion 1.8s infinite alternate ease-in-out;
+  filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.8));
+}
+
+@keyframes catFlowerMotion {
+  0% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0deg) translateY(-6px) scale(1.03);
+  }
+  100% {
+    transform: rotate(3deg) translateY(-3px);
+  }
 }
 
 #cake { flex-direction: column; }
@@ -152,12 +144,12 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 #minigame { flex-direction: column; }
 .game-title {
-  font-size: clamp(16px, 4vw, 24px);
+  font-size: clamp(15px, 3.8vw, 22px);
   margin-bottom: 25px;
-  background: rgba(0,0,0,0.7);
+  background: rgba(20,20,30,0.9);
   padding: 12px 20px;
   border-radius: 12px;
-  border: 2px solid #555;
+  border: 1px solid rgba(255,255,255,0.2);
   text-shadow: 2px 2px #000;
   max-width: 90vw;
 }
@@ -168,7 +160,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   align-items: center;
   width: 100%;
   max-width: 450px;
-  height: 160px;
+  height: 180px;
   position: relative;
   margin: 10px auto 30px;
 }
@@ -226,6 +218,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .chest-wrapper.open .minecraft-chest { background: #5c3a1e; transform: scale(1.1); }
 .chest-wrapper.open .minecraft-chest::after { top: 10px; height: 6px; background: #201008; }
 
+/* Enchanted Book Item */
 .paper-item {
   position: absolute;
   width: 42px;
@@ -239,16 +232,13 @@ button { font-family: inherit; border: none; cursor: pointer; }
   transform: scale(0.3);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 0 15px #d946ef, 0 0 25px #a855f7;
-  animation: enchantGlow 1.5s infinite alternate;
 }
 
 .paper-item::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 13px;
-  width: 11px;
-  height: 100%;
+  top: 0; left: 13px;
+  width: 11px; height: 100%;
   background: #dc2626;
   border-left: 2px solid #7f1d1d;
   border-right: 2px solid #7f1d1d;
@@ -257,44 +247,62 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .paper-item::after {
   content: "";
   position: absolute;
-  top: 19px;
-  left: 10px;
-  width: 17px;
-  height: 8px;
+  top: 19px; left: 10px;
+  width: 17px; height: 8px;
   background: #facc15;
   border: 2px solid #854d0e;
   border-radius: 2px;
 }
 
-@keyframes enchantGlow {
-  0% { box-shadow: 0 0 10px #c084fc, 0 0 20px #a855f7; }
-  100% { box-shadow: 0 0 20px #f0abfc, 0 0 35px #e879f9; }
-}
-
-.cat-item {
-  position: absolute;
-  width: 55px;
-  height: auto;
-  opacity: 0;
-  z-index: 10;
-  pointer-events: none;
-  transform: scale(0.3);
-  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));
-}
-
-.chest-wrapper.open-wrong .cat-item {
+.chest-wrapper.open-correct .paper-item,
+.chest-wrapper.open-wrong .paper-item {
   opacity: 1;
-  animation: floatCat 1.8s ease-in-out infinite alternate;
+  transform: translateY(-55px) scale(1.2);
 }
 
-@keyframes floatCat {
-  0% { transform: translateY(-50px) scale(1.2) rotate(-5deg); }
-  100% { transform: translateY(-62px) scale(1.25) rotate(5deg); }
+/* Wrong Chest Cat Popup with "Try Again" Badge */
+.wrong-cat-container {
+  position: absolute;
+  top: -110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transform: scale(0.4) translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.chest-wrapper.open-correct .paper-item { opacity: 1; transform: translateY(-55px) scale(1.3); }
+.chest-wrapper.open-wrong .wrong-cat-container {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
 
+.try-again-tag {
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+  white-space: nowrap;
+  margin-bottom: 2px;
+  border: 1px solid #ffffff;
+  animation: popTag 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes popTag {
+  0% { transform: scale(0.95); }
+  100% { transform: scale(1.05); }
+}
+
+.wrong-cat-container .cat-img {
+  width: 85px;
+}
+
+/* Letter Screen */
 #letter { 
   align-items: center;
   user-select: text;
@@ -316,44 +324,16 @@ button { font-family: inherit; border: none; cursor: pointer; }
     0 15px 35px rgba(0, 0, 0, 0.85);
   margin: auto;
   position: relative;
-  font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   -webkit-overflow-scrolling: touch;
 }
 
-.letter-paper::before,
-.letter-paper::after {
-  content: "";
-  position: sticky;
-  display: block;
-  width: 14px;
-  height: 14px;
-  background: #facc15;
-  border: 2px solid #713f12;
-  z-index: 5;
-}
-
-.letter-paper::before {
-  top: -15px;
-  left: -15px;
-  float: left;
-  margin-bottom: -14px;
-}
-
-.letter-paper::after {
-  top: -15px;
-  right: -15px;
-  float: right;
-  margin-bottom: -14px;
-}
-
 .letter-paper h2 {
   text-align: center;
-  font-size: clamp(22px, 5vw, 28px);
+  font-size: clamp(20px, 5vw, 26px);
   margin-top: 5px;
   margin-bottom: 20px;
   color: #3b220c;
-  text-shadow: 1px 1px 0px #fff;
   border-bottom: 3px dashed #b89868;
   padding-bottom: 10px;
 }
@@ -366,18 +346,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
   color: #2b180a;
 }
 
-.letter-paper::-webkit-scrollbar {
-  width: 10px;
-}
-.letter-paper::-webkit-scrollbar-track {
-  background: #c7b38d;
-  border-left: 2px solid #8c5d2b;
-}
-.letter-paper::-webkit-scrollbar-thumb {
-  background: #5c3a1e;
-  border: 2px solid #2b180a;
-}
-
 @media(max-width:550px) {
   #timer { grid-template-columns: repeat(2,1fr); }
   .letter-paper { padding: 20px 15px; max-height: 85vh; }
@@ -385,7 +353,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 @keyframes cakeZoom {
   0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+  100% { transform: scale(1.08); }
 }
 </style>
 </head>
@@ -398,13 +366,17 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 <div class="stars-container" id="stars"></div>
 
+<!-- COUNTDOWN SCREEN -->
 <section id="countdown" class="screen active">
   <div class="card">
     <div class="small-title">✦ MALUNGGAY WORLD ✦</div>
     <h1>Your Special Day<br>is Coming</h1>
     <p class="subtitle">Something special is waiting for you. ♡</p>
 
-    <img src="sticker.png" alt="Cute Pixel Character" class="cute-sticker">
+    <!-- Animated Pixel Cat with Flowers -->
+    <div class="cat-anim-wrapper">
+      <img src="sticker.png" alt="Cute Pixel Cat with Flowers" class="cat-img">
+    </div>
 
     <div id="timer">
       <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
@@ -420,37 +392,54 @@ button { font-family: inherit; border: none; cursor: pointer; }
   </div>
 </section>
 
+<!-- CAKE SCREEN -->
 <section id="cake" class="screen">
   <div class="cake-message">Here's a cake for you,<br>take a wish.</div>
   
-  <img src="cake.png" alt="Pixel Birthday Cake" style="width: 220px; height: auto; margin: 20px auto; display: block; animation: cakeZoom 3s ease-in-out infinite alternate;">
+  <img src="cake.png" alt="Pixel Birthday Cake" style="width: 200px; height: auto; margin: 25px auto; display: block; animation: cakeZoom 3s ease-in-out infinite alternate;">
 
   <h2>Happy Birthday, Baby! 🎂</h2>
   <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
 </section>
 
+<!-- MINI-GAME SCREEN -->
 <section id="minigame" class="screen">
   <div class="game-title" id="gameInstruction">📖 The Enchanted Book is hidden in one of the chests...</div>
 
   <div class="chests-container" id="chestsContainer">
+    <!-- Chest 0 -->
     <div class="chest-wrapper" id="chest0">
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
-      <img src="sticker.png" class="cat-item" alt="Cute Cat">
+      <div class="wrong-cat-container">
+        <div class="try-again-tag">TRY AGAIN! 😸</div>
+        <img src="sticker.png" class="cat-img" alt="Cute Cat">
+      </div>
     </div>
+
+    <!-- Chest 1 -->
     <div class="chest-wrapper" id="chest1">
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
-      <img src="sticker.png" class="cat-item" alt="Cute Cat">
+      <div class="wrong-cat-container">
+        <div class="try-again-tag">TRY AGAIN! 😸</div>
+        <img src="sticker.png" class="cat-img" alt="Cute Cat">
+      </div>
     </div>
+
+    <!-- Chest 2 -->
     <div class="chest-wrapper" id="chest2">
       <div class="minecraft-chest"></div>
       <div class="paper-item"></div>
-      <img src="sticker.png" class="cat-item" alt="Cute Cat">
+      <div class="wrong-cat-container">
+        <div class="try-again-tag">TRY AGAIN! 😸</div>
+        <img src="sticker.png" class="cat-img" alt="Cute Cat">
+      </div>
     </div>
   </div>
 </section>
 
+<!-- LETTER SCREEN -->
 <section id="letter" class="screen">
   <div class="letter-paper">
     <h2>📖 Book & Quill Letter</h2>
@@ -598,7 +587,7 @@ chests.forEach((chest, idx) => {
     if (idx === correctChestIndex) {
       gameInteractive = false;
       chest.classList.add("open", "open-correct");
-      instruction.textContent = "✨ You found the Enchanted Book!";
+      instruction.textContent = "✨ You found the real Enchanted Book!";
       playSound(880, "square", 0.2);
 
       setTimeout(() => {
@@ -608,7 +597,7 @@ chests.forEach((chest, idx) => {
       if (chest.classList.contains("open-wrong")) return;
 
       chest.classList.add("open", "open-wrong", "shake");
-      instruction.textContent = "Oops, please try again... 🐱";
+      instruction.textContent = "Oops! Maling chest! Try again... 😸";
       playSound(250, "sawtooth", 0.15);
 
       setTimeout(() => {
