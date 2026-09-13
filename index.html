@@ -15,20 +15,32 @@ body {
   font-family: 'Courier New', Courier, monospace;
   color: white;
   overflow: hidden;
+  background-color: #120a05;
+  user-select: none;
+}
 
-  /* BACKUP BACKGROUND COLOR KUNG MABAGAL ANG INTERNET */
-  background-color: #2e1d11;
-
-  /* DIRECT RAW LINK SA REPOSITORY MO (KERBBATALLER-LANG) */
+/* ANIMATED MOVING BACKGROUND */
+.bg-animation {
+  position: fixed;
+  top: -5%;
+  left: -5%;
+  width: 110vw;
+  height: 110vh;
+  z-index: 0;
   background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url('background.jpg'),
     url('https://raw.githubusercontent.com/kerbbataller-lang/kerbbataller-lang.github.io/main/background.jpg');
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-attachment: fixed;
-  user-select: none;
+  animation: bgMove 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-15px, -10px); }
+  100% { transform: scale(1.04) translate(15px, 10px); }
 }
 
 .screen {
@@ -38,10 +50,10 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 15px;
   position: relative;
   z-index: 2;
-  background: rgba(10, 6, 4, 0.65);
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .screen.active {
@@ -75,52 +87,76 @@ body {
   100% { transform: translateX(-600px) translateY(600px) rotate(-45deg); opacity: 0; }
 }
 
+/* COMPACT CARD BOX */
 .card {
-  width: min(700px, 95vw);
-  padding: 30px 20px;
-  background: rgba(26, 18, 14, 0.92);
-  border-radius: 16px;
-  border: 4px solid #8c5d2b;
-  box-shadow: inset 0 0 0 4px #3d2510, 0 10px 40px rgba(0,0,0,0.9);
+  width: min(420px, 92vw);
+  padding: 18px 15px;
+  background: rgba(20, 13, 9, 0.82);
+  border-radius: 14px;
+  border: 3px solid #8c5d2b;
+  box-shadow: inset 0 0 0 3px #3d2510, 0 8px 30px rgba(0,0,0,0.85);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.small-title { letter-spacing: 4px; font-size: 13px; opacity: .9; color: #facc15; }
-h1 { font-size: clamp(30px, 6.5vw, 55px); margin: 10px 0; font-style: italic; text-shadow: 2px 2px 10px #000; }
-.subtitle { font-size: 14px; opacity: .8; }
+.front-cat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.front-cat-img {
+  width: 65px;
+  height: auto;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+}
+
+.small-title { letter-spacing: 3px; font-size: 11px; opacity: .9; color: #facc15; }
+h1 { font-size: clamp(22px, 5.2vw, 36px); margin: 6px 0; font-style: italic; text-shadow: 2px 2px 8px #000; line-height: 1.2; }
+.subtitle { font-size: 12px; opacity: .85; margin-bottom: 12px; }
 
 #timer {
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  gap: 10px;
-  margin: 25px 0;
+  gap: 6px;
+  margin: 12px 0;
+  width: 100%;
 }
 
 .time {
-  padding: 15px 5px;
+  padding: 8px 2px;
   border: 2px solid #8c5d2b;
-  border-radius: 8px;
-  background: rgba(20, 10, 5, 0.8);
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+  border-radius: 6px;
+  background: rgba(15, 8, 4, 0.75);
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
 }
 
-.time strong { display: block; font-size: clamp(24px, 6vw, 42px); color: #f43f5e; }
-.time span { font-size: 10px; letter-spacing: 2px; }
+.time strong { display: block; font-size: clamp(18px, 4.5vw, 28px); color: #f43f5e; line-height: 1.1; }
+.time span { font-size: 8px; letter-spacing: 1px; }
+
+#status {
+  font-size: 12px;
+  margin: 10px 0;
+}
 
 button { font-family: inherit; border: none; cursor: pointer; }
 .btn {
-  padding: 14px 30px;
+  padding: 10px 24px;
   border-radius: 8px;
   background: #3b82f6;
-  border: 3px solid #1d4ed8;
+  border: 2px solid #1d4ed8;
   color: white;
   font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 5px 0px #1e3a8a;
+  font-size: 14px;
+  box-shadow: 0 4px 0px #1e3a8a;
   transition: transform 0.1s;
 }
 
-.btn:active { transform: translateY(4px); box-shadow: 0 1px 0px #1e3a8a; }
-.sound { margin-bottom: 12px; background: rgba(255,255,255,.1); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0px #1e3a8a; }
+.sound { margin-bottom: 6px; padding: 6px 14px; background: rgba(255,255,255,.12); }
 
 .cat-img {
   width: 70px;
@@ -129,14 +165,14 @@ button { font-family: inherit; border: none; cursor: pointer; }
 }
 
 #cake { flex-direction: column; }
-.cake-message { font-size: clamp(20px,5vw,30px); line-height: 1.5; text-shadow: 2px 3px 5px #000; }
+.cake-message { font-size: clamp(18px,4.5vw,26px); line-height: 1.4; text-shadow: 2px 3px 5px #000; }
 
 #minigame { flex-direction: column; }
 .game-title {
-  font-size: clamp(15px, 3.8vw, 22px);
-  margin-bottom: 25px;
-  background: rgba(20, 12, 8, 0.95);
-  padding: 12px 20px;
+  font-size: clamp(14px, 3.5vw, 20px);
+  margin-bottom: 20px;
+  background: rgba(20, 12, 8, 0.88);
+  padding: 10px 16px;
   border-radius: 8px;
   border: 3px solid #6b4727;
   text-shadow: 2px 2px #000;
@@ -148,16 +184,16 @@ button { font-family: inherit; border: none; cursor: pointer; }
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 450px;
-  height: 220px;
+  max-width: 420px;
+  height: 200px;
   position: relative;
-  margin: 10px auto 30px;
+  margin: 10px auto 20px;
 }
 
 .chest-wrapper {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   cursor: pointer;
   transition: left 0.4s ease-in-out, transform 0.2s;
   display: flex;
@@ -166,8 +202,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
 }
 
 .minecraft-chest {
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   background: #8b5a2b;
   border: 4px solid #3d2314;
   box-shadow: inset 0 0 0 3px #a66d3b, 0 8px 15px rgba(0,0,0,0.6);
@@ -178,8 +214,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .minecraft-chest::before {
   content: "";
   position: absolute;
-  top: 30px; left: 26px;
-  width: 12px; height: 16px;
+  top: 28px; left: 24px;
+  width: 12px; height: 14px;
   background: #bfbfbf;
   border: 2px solid #3a3a3a;
   border-radius: 2px;
@@ -189,7 +225,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .minecraft-chest::after {
   content: "";
   position: absolute;
-  top: 34px; left: 0;
+  top: 32px; left: 0;
   width: 100%; height: 4px;
   background: #3d2314;
   z-index: 2;
@@ -315,21 +351,21 @@ button { font-family: inherit; border: none; cursor: pointer; }
 #letter { 
   align-items: center;
   user-select: text;
-  padding: 20px 10px;
+  padding: 15px 10px;
 }
 
 .letter-paper {
-  width: min(650px, 92vw);
+  width: min(600px, 92vw);
   max-height: 82vh;
   overflow-y: auto;
-  padding: 30px 25px;
+  padding: 25px 20px;
   background: #f1e4c3;
   color: #1c120c;
   text-align: left;
-  border: 8px solid #4a2f13;
+  border: 6px solid #4a2f13;
   box-shadow: 
-    inset 0 0 0 4px #8c5d2b,
-    0 0 0 4px #261608,
+    inset 0 0 0 3px #8c5d2b,
+    0 0 0 3px #261608,
     0 15px 35px rgba(0, 0, 0, 0.85);
   margin: auto;
   position: relative;
@@ -339,25 +375,24 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 .letter-paper h2 {
   text-align: center;
-  font-size: clamp(20px, 5vw, 26px);
-  margin-top: 5px;
-  margin-bottom: 20px;
+  font-size: clamp(18px, 4.5vw, 24px);
+  margin-top: 0;
+  margin-bottom: 15px;
   color: #3b220c;
-  border-bottom: 3px dashed #b89868;
-  padding-bottom: 10px;
+  border-bottom: 2px dashed #b89868;
+  padding-bottom: 8px;
 }
 
 .letter-paper p {
   white-space: pre-line;
-  line-height: 1.7;
-  font-size: clamp(14px, 3.8vw, 16px);
+  line-height: 1.6;
+  font-size: clamp(13px, 3.5vw, 15px);
   margin-bottom: 0;
   color: #2b180a;
 }
 
 @media(max-width:550px) {
-  #timer { grid-template-columns: repeat(2,1fr); }
-  .letter-paper { padding: 20px 15px; max-height: 85vh; }
+  .letter-paper { padding: 18px 12px; max-height: 85vh; }
 }
 
 @keyframes cakeZoom {
@@ -369,6 +404,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
 <body>
 
+<!-- MOVING BACKGROUND LAYER -->
+<div class="bg-animation"></div>
+
 <audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -378,6 +416,12 @@ button { font-family: inherit; border: none; cursor: pointer; }
 <!-- COUNTDOWN SCREEN -->
 <section id="countdown" class="screen active">
   <div class="card">
+    <!-- SI MALUNGGAY SA UNAHAN -->
+    <div class="front-cat-container">
+      <div class="cat-name-tag">🐾 MALUNGGAY</div>
+      <img src="sticker.gif" class="front-cat-img" alt="Cute Cat GIF">
+    </div>
+
     <div class="small-title">✦ MALUNGGAY WORLD ✦</div>
     <h1>Your Special Day<br>is Coming</h1>
     <p class="subtitle">Something special is waiting for you. ♡</p>
@@ -391,7 +435,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 
     <p id="status">🎉 It's your birthday! Your world is ready.</p>
 
-    <button class="btn sound" id="soundButton">🔊</button><br><br>
+    <button class="btn sound" id="soundButton">🔊</button><br>
     <button class="btn" id="startButton">START</button>
   </div>
 </section>
@@ -400,7 +444,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 <section id="cake" class="screen">
   <div class="cake-message">Here's a cake for you,<br>take a wish.</div>
   
-  <img src="cake.png" alt="Pixel Birthday Cake" style="width: 200px; height: auto; margin: 25px auto; display: block; animation: cakeZoom 3s ease-in-out infinite alternate;">
+  <img src="cake.png" alt="Pixel Birthday Cake" style="width: 170px; height: auto; margin: 20px auto; display: block; animation: cakeZoom 3s ease-in-out infinite alternate;">
 
   <h2>Happy Birthday, Baby! 🎂</h2>
   <button class="btn" id="letterButton">OPEN YOUR LETTER 💌</button>
@@ -464,6 +508,94 @@ Once again, happy, happy birthday to my prettiest wifey, my sugar plum plum, in 
 </section>
 
 <script>
+/* WEB AUDIO SOUND GENERATOR */
+let audioContext = null;
+
+function getAudioContext() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+  return audioContext;
+}
+
+// Retro Click Sound
+function playClickSound() {
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(600, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch(e) {}
+}
+
+// Shuffle Sound
+function playShuffleSound() {
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(350 + Math.random() * 200, ctx.currentTime);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.06);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.06);
+  } catch(e) {}
+}
+
+// Wrong Chest Sound
+function playWrongSound() {
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(180, ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(110, ctx.currentTime + 0.25);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.25);
+  } catch(e) {}
+}
+
+// Victory Sound
+function playVictorySound() {
+  try {
+    const ctx = getAudioContext();
+    const now = ctx.currentTime;
+    const notes = [440, 554.37, 659.25, 880];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(freq, now + (i * 0.08));
+      gain.gain.setValueAtTime(0.1, now + (i * 0.08));
+      gain.gain.linearRampToValueAtTime(0.01, now + (i * 0.08) + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + (i * 0.08));
+      osc.stop(now + (i * 0.08) + 0.15);
+    });
+  } catch(e) {}
+}
+
+/* BACKGROUND SHOOTING STARS */
 function createShootingStars() {
   const container = document.getElementById('stars');
   for (let i = 0; i < 6; i++) {
@@ -508,6 +640,7 @@ function showScreen(id) {
 }
 
 startButton.onclick = function() {
+  playClickSound();
   startMusic();
   showScreen("cake");
 };
@@ -563,7 +696,7 @@ function startChestGame() {
       positions[idx2] = temp;
 
       positionChests();
-      playSound(700, "sine", 0.05);
+      playShuffleSound();
 
       shuffleCount++;
       if (shuffleCount >= maxShuffles) {
@@ -579,9 +712,9 @@ function startChestGame() {
 }
 
 document.getElementById("letterButton").onclick = function() {
+  playClickSound();
   startChestGame();
 };
-
 chests.forEach((chest, idx) => {
   chest.onclick = function() {
     if (!gameInteractive || isShuffling) return;
@@ -590,7 +723,7 @@ chests.forEach((chest, idx) => {
       gameInteractive = false;
       chest.classList.add("open", "open-correct");
       instruction.textContent = "✨ You found the real Enchanted Book!";
-      playSound(880, "square", 0.2);
+      playVictorySound();
 
       setTimeout(() => {
         showScreen("letter");
@@ -600,7 +733,7 @@ chests.forEach((chest, idx) => {
 
       chest.classList.add("open", "open-wrong", "shake");
       instruction.textContent = "Malunggay is here!";
-      playSound(250, "sawtooth", 0.15);
+      playWrongSound();
 
       setTimeout(() => {
         chest.classList.remove("shake");
@@ -611,34 +744,13 @@ chests.forEach((chest, idx) => {
 
 window.addEventListener('resize', positionChests);
 
-let audioContext = null;
 let soundOn = false;
-
-function playSound(freq = 600, type = "square", duration = 0.08) {
-  if (!soundOn) return;
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  try {
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    oscillator.type = type;
-    oscillator.frequency.value = freq;
-    gain.gain.setValueAtTime(0.03, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + duration);
-  } catch(e) {}
-}
-
 document.getElementById("soundButton").onclick = function() {
+  playClickSound();
   soundOn = !soundOn;
   if (soundOn) {
     this.textContent = "🔊";
     startMusic();
-    playSound(520, "square", 0.1);
   } else {
     this.textContent = "🔇";
     bgMusic.pause();
@@ -649,5 +761,4 @@ updateCountdown();
 </script>
 
 </body>
-        </html>
-  
+</html>
